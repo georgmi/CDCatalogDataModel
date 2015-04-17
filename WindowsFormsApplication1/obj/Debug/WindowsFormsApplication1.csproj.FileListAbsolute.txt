@@ -1,0 +1,15 @@
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\CDCatalogDataModel.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\CDCatalogDataModel.pdb
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.xml
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.xml
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb

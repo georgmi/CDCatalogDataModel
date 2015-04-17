@@ -1,0 +1,10 @@
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.dll.config
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.pdb
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.SqlServer.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.xml
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.SqlServer.xml
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.csprojResolveAssemblyReference.cache
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.dll
+E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.pdb

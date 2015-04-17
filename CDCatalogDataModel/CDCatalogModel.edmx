@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CDCatalogModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="CDCatalogModelStoreContainer">
+          <EntitySet Name="Album" EntityType="CDCatalogModel.Store.Album" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Artist" EntityType="CDCatalogModel.Store.Artist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Genre" EntityType="CDCatalogModel.Store.Genre" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Playlist" EntityType="CDCatalogModel.Store.Playlist" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PlaylistSong" EntityType="CDCatalogModel.Store.PlaylistSong" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Song" EntityType="CDCatalogModel.Store.Song" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="CDCatalogModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Album_Artist" Association="CDCatalogModel.Store.FK_Album_Artist">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="Album" EntitySet="Album" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistSong_Playlist" Association="CDCatalogModel.Store.FK_PlaylistSong_Playlist">
+            <End Role="Playlist" EntitySet="Playlist" />
+            <End Role="PlaylistSong" EntitySet="PlaylistSong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistSong_Song" Association="CDCatalogModel.Store.FK_PlaylistSong_Song">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="PlaylistSong" EntitySet="PlaylistSong" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Album" Association="CDCatalogModel.Store.FK_Song_Album">
+            <End Role="Album" EntitySet="Album" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Artist" Association="CDCatalogModel.Store.FK_Song_Artist">
+            <End Role="Artist" EntitySet="Artist" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Genre" Association="CDCatalogModel.Store.FK_Song_Genre">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="ArtistID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ArtistName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+          </Key>
+          <Property Name="PlaylistID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PlaylistName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PlaylistSong">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="PlaylistID" Type="int" Nullable="false" />
+          <Property Name="SongID" Type="int" Nullable="false" />
+          <Property Name="SongOrder" Type="int" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="SongID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SongTitle" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="ArtistID" Type="int" Nullable="false" />
+          <Property Name="AlbumID" Type="int" />
+          <Property Name="TrackNumber" Type="int" Nullable="false" />
+          <Property Name="GenreID" Type="int" Nullable="false" />
+          <Property Name="TrackLength" Type="float" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Album_Artist">
+          <End Role="Artist" Type="CDCatalogModel.Store.Artist" Multiplicity="1" />
+          <End Role="Album" Type="CDCatalogModel.Store.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistSong_Playlist">
+          <End Role="Playlist" Type="CDCatalogModel.Store.Playlist" Multiplicity="1" />
+          <End Role="PlaylistSong" Type="CDCatalogModel.Store.PlaylistSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlist">
+              <PropertyRef Name="PlaylistID" />
+            </Principal>
+            <Dependent Role="PlaylistSong">
+              <PropertyRef Name="PlaylistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistSong_Song">
+          <End Role="Song" Type="CDCatalogModel.Store.Song" Multiplicity="1" />
+          <End Role="PlaylistSong" Type="CDCatalogModel.Store.PlaylistSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="SongID" />
+            </Principal>
+            <Dependent Role="PlaylistSong">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Album">
+          <End Role="Album" Type="CDCatalogModel.Store.Album" Multiplicity="0..1" />
+          <End Role="Song" Type="CDCatalogModel.Store.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Artist">
+          <End Role="Artist" Type="CDCatalogModel.Store.Artist" Multiplicity="1" />
+          <End Role="Song" Type="CDCatalogModel.Store.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Genre">
+          <End Role="Genre" Type="CDCatalogModel.Store.Genre" Multiplicity="1" />
+          <End Role="Song" Type="CDCatalogModel.Store.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CDCatalogModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CDCatalogEntities" p1:LazyLoadingEnabled="false">
+          <EntitySet Name="Albums" EntityType="CDCatalogModel.Album" />
+          <EntitySet Name="Artists" EntityType="CDCatalogModel.Artist" />
+          <EntitySet Name="Genres" EntityType="CDCatalogModel.Genre" />
+          <EntitySet Name="Playlists" EntityType="CDCatalogModel.Playlist" />
+          <EntitySet Name="PlaylistSongs" EntityType="CDCatalogModel.PlaylistSong" />
+          <EntitySet Name="Songs" EntityType="CDCatalogModel.Song" />
+          <EntitySet Name="sysdiagrams" EntityType="CDCatalogModel.sysdiagram" />
+          <AssociationSet Name="FK_Album_Artist" Association="CDCatalogModel.FK_Album_Artist">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="Album" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Album" Association="CDCatalogModel.FK_Song_Album">
+            <End Role="Album" EntitySet="Albums" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Artist" Association="CDCatalogModel.FK_Song_Artist">
+            <End Role="Artist" EntitySet="Artists" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Song_Genre" Association="CDCatalogModel.FK_Song_Genre">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Song" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistSong_Playlist" Association="CDCatalogModel.FK_PlaylistSong_Playlist">
+            <End Role="Playlist" EntitySet="Playlists" />
+            <End Role="PlaylistSong" EntitySet="PlaylistSongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PlaylistSong_Song" Association="CDCatalogModel.FK_PlaylistSong_Song">
+            <End Role="Song" EntitySet="Songs" />
+            <End Role="PlaylistSong" EntitySet="PlaylistSongs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="AlbumID" />
+          </Key>
+          <Property Name="AlbumID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumTitle" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="ArtistID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artist" Relationship="CDCatalogModel.FK_Album_Artist" FromRole="Album" ToRole="Artist" />
+          <NavigationProperty Name="Songs" Relationship="CDCatalogModel.FK_Song_Album" FromRole="Album" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ArtistName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Albums" Relationship="CDCatalogModel.FK_Album_Artist" FromRole="Artist" ToRole="Album" />
+          <NavigationProperty Name="Songs" Relationship="CDCatalogModel.FK_Song_Artist" FromRole="Artist" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Songs" Relationship="CDCatalogModel.FK_Song_Genre" FromRole="Genre" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Playlist">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+          </Key>
+          <Property Name="PlaylistID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="PlaylistName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="PlaylistSongs" Relationship="CDCatalogModel.FK_PlaylistSong_Playlist" FromRole="Playlist" ToRole="PlaylistSong" />
+        </EntityType>
+        <EntityType Name="PlaylistSong">
+          <Key>
+            <PropertyRef Name="PlaylistID" />
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="PlaylistID" Type="Int32" Nullable="false" />
+          <Property Name="SongID" Type="Int32" Nullable="false" />
+          <Property Name="SongOrder" Type="Int32" />
+          <NavigationProperty Name="Playlist" Relationship="CDCatalogModel.FK_PlaylistSong_Playlist" FromRole="PlaylistSong" ToRole="Playlist" />
+          <NavigationProperty Name="Song" Relationship="CDCatalogModel.FK_PlaylistSong_Song" FromRole="PlaylistSong" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="SongID" />
+          </Key>
+          <Property Name="SongID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="SongTitle" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ArtistID" Type="Int32" Nullable="false" />
+          <Property Name="AlbumID" Type="Int32" />
+          <Property Name="TrackNumber" Type="Int32" Nullable="false" />
+          <Property Name="GenreID" Type="Int32" Nullable="false" />
+          <Property Name="TrackLength" Type="Double" Nullable="false" />
+          <Property Name="Rating" Type="Int32" />
+          <NavigationProperty Name="Album" Relationship="CDCatalogModel.FK_Song_Album" FromRole="Song" ToRole="Album" />
+          <NavigationProperty Name="Artist" Relationship="CDCatalogModel.FK_Song_Artist" FromRole="Song" ToRole="Artist" />
+          <NavigationProperty Name="Genre" Relationship="CDCatalogModel.FK_Song_Genre" FromRole="Song" ToRole="Genre" />
+          <NavigationProperty Name="PlaylistSongs" Relationship="CDCatalogModel.FK_PlaylistSong_Song" FromRole="Song" ToRole="PlaylistSong" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Album_Artist">
+          <End Role="Artist" Type="CDCatalogModel.Artist" Multiplicity="1" />
+          <End Role="Album" Type="CDCatalogModel.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Album">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Album">
+          <End Role="Album" Type="CDCatalogModel.Album" Multiplicity="0..1" />
+          <End Role="Song" Type="CDCatalogModel.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Album">
+              <PropertyRef Name="AlbumID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="AlbumID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Artist">
+          <End Role="Artist" Type="CDCatalogModel.Artist" Multiplicity="1" />
+          <End Role="Song" Type="CDCatalogModel.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artist">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Song_Genre">
+          <End Role="Genre" Type="CDCatalogModel.Genre" Multiplicity="1" />
+          <End Role="Song" Type="CDCatalogModel.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistSong_Playlist">
+          <End Role="Playlist" Type="CDCatalogModel.Playlist" Multiplicity="1" />
+          <End Role="PlaylistSong" Type="CDCatalogModel.PlaylistSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Playlist">
+              <PropertyRef Name="PlaylistID" />
+            </Principal>
+            <Dependent Role="PlaylistSong">
+              <PropertyRef Name="PlaylistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PlaylistSong_Song">
+          <End Role="Song" Type="CDCatalogModel.Song" Multiplicity="1" />
+          <End Role="PlaylistSong" Type="CDCatalogModel.PlaylistSong" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="SongID" />
+            </Principal>
+            <Dependent Role="PlaylistSong">
+              <PropertyRef Name="SongID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CDCatalogModelStoreContainer" CdmEntityContainer="CDCatalogEntities">
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="CDCatalogModel.Album">
+              <MappingFragment StoreEntitySet="Album">
+                <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+                <ScalarProperty Name="AlbumTitle" ColumnName="AlbumTitle" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="CDCatalogModel.Artist">
+              <MappingFragment StoreEntitySet="Artist">
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="ArtistName" ColumnName="ArtistName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="CDCatalogModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Playlists">
+            <EntityTypeMapping TypeName="CDCatalogModel.Playlist">
+              <MappingFragment StoreEntitySet="Playlist">
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
+                <ScalarProperty Name="PlaylistName" ColumnName="PlaylistName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlaylistSongs">
+            <EntityTypeMapping TypeName="CDCatalogModel.PlaylistSong">
+              <MappingFragment StoreEntitySet="PlaylistSong">
+                <ScalarProperty Name="PlaylistID" ColumnName="PlaylistID" />
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
+                <ScalarProperty Name="SongOrder" ColumnName="SongOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="CDCatalogModel.Song">
+              <MappingFragment StoreEntitySet="Song">
+                <ScalarProperty Name="SongID" ColumnName="SongID" />
+                <ScalarProperty Name="SongTitle" ColumnName="SongTitle" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+                <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="TrackLength" ColumnName="TrackLength" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CDCatalogModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
