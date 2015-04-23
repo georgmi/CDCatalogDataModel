@@ -13,3 +13,18 @@ E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Deb
 E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
 E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 E:\C#_Capstone\George's Code\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\CDCatalogDataModel.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\CDCatalogDataModel.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

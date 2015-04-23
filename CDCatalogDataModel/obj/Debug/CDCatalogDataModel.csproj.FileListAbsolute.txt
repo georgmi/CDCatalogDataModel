@@ -8,3 +8,13 @@ E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\Ent
 E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.csprojResolveAssemblyReference.cache
 E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.dll
 E:\C#_Capstone\George's Code\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.dll.config
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\CDCatalogDataModel.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.csprojResolveAssemblyReference.cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\obj\Debug\CDCatalogDataModel.pdb

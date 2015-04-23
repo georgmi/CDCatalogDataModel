@@ -70,7 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CDCatalogModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CDCatalogManager.cs" />
     <Compile Include="Genre.cs">
       <DependentUpon>CDCatalogModel.tt</DependentUpon>
     </Compile>
