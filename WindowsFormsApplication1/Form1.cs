@@ -24,12 +24,14 @@ namespace WindowsFormsApplication1
             {
                 // Create a Genre
                 Genre genre = new Genre();
-                genre.GenreName = "Rock";
+                genre.GenreName = "Bluegrass";
                 db.Genres.Add(genre);
                 db.SaveChanges();
 
                 //Select genres
                 List<Genre> genres = db.Genres.OrderBy(g => g.GenreName).ToList();
+                listBox1.DataSource = genres;
+
 
                 Artist artist = new Artist();
                 artist.ArtistName = "Carl";

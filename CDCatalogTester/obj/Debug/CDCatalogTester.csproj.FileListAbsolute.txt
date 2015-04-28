@@ -1,0 +1,16 @@
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\CDCatalogTester.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\CDCatalogTester.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\CDCatalogDataModel.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\nunit.framework.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\EntityFramework.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\CDCatalogDataModel.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\nunit.framework.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\EntityFramework.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\obj\Debug\CDCatalogTester.csprojResolveAssemblyReference.cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\obj\Debug\CDCatalogTester.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\obj\Debug\CDCatalogTester.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\CDCatalogTester.dll.config
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogTester\bin\Debug\EntityFramework.SqlServer.xml
