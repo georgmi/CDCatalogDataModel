@@ -19,9 +19,10 @@ namespace CDCatalogDataModel
                 {
                     albumList = db.Albums.OrderBy(a => a.AlbumTitle).ToList();
                 }
-                catch 
+                catch (Exception e)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    throw e;
+                    //TODO: Figure out what to do with an exception. 
                 }
                 return albumList;
             }
@@ -38,8 +39,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -57,8 +59,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -79,8 +82,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -97,9 +101,10 @@ namespace CDCatalogDataModel
                 {
                     artistList = db.Artists.OrderBy(a => a.ArtistName).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    throw e;
+                    //TODO: Figure out what to do with an exception. 
                 }
                 return artistList;
             }
@@ -116,8 +121,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -135,8 +141,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -157,8 +164,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -175,9 +183,10 @@ namespace CDCatalogDataModel
                 {
                     genreList = db.Genres.OrderBy(g => g.GenreName).ToList();
                 }
-                catch 
+                catch (Exception e)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    throw e;
+                    //TODO: Figure out what to do with an exception. 
                 }
                 return genreList;
             }
@@ -194,8 +203,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -213,8 +223,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -235,8 +246,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -253,9 +265,10 @@ namespace CDCatalogDataModel
                 {
                     playlistList = db.Playlists.OrderBy(p => p.PlaylistName).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    throw e;
+                    //TODO: Figure out what to do with an exception. 
                 }
                 return playlistList;
             }
@@ -272,8 +285,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -291,8 +305,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -313,8 +328,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -331,9 +347,10 @@ namespace CDCatalogDataModel
                 {
                     songList = db.Songs.OrderBy(s => s.SongTitle).ToList();
                 }
-                catch
+                catch (Exception e)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    throw e;
+                    //TODO: Figure out what to do with an exception. 
                 }
                 return songList;
             }
@@ -350,8 +367,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -369,8 +387,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;
@@ -391,8 +410,9 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception e)
                 {
+                    throw e;
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;

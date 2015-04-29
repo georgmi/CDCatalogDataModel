@@ -22,31 +22,43 @@ namespace WindowsFormsApplication1
         {
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                // Create a Genre
-                Genre genre = new Genre();
-                genre.GenreName = "Bluegrass";
-                db.Genres.Add(genre);
-                db.SaveChanges();
+                //List<Playlist> artistList = db.Playlists.OrderBy(a => a.PlaylistName).ToList();
 
-                //Select genres
-                List<Genre> genres = db.Genres.OrderBy(g => g.GenreName).ToList();
-                listBox1.DataSource = genres;
+                //foreach (Playlist a in artistList)
+                //{
+                //    if (a.PlaylistName == "Test Playlist")
+                //    {
+                //        db.Playlists.Remove(a);
+                //        db.SaveChanges();
+                //    }
+
+                //}
+
+                //// Create a Genre
+                //Genre genre = new Genre();
+                //genre.GenreName = "Bluegrass";
+                //db.Genres.Add(genre);
+                //db.SaveChanges();
+
+                ////Select genres
+                //List<Genre> genres = db.Genres.OrderBy(g => g.GenreName).ToList();
+                //listBox1.DataSource = genres;
 
 
-                Artist artist = new Artist();
-                artist.ArtistName = "Carl";
-                db.Artists.Add(artist);
-                db.SaveChanges();
+                //Artist artist = new Artist();
+                //artist.ArtistName = "Carl";
+                //db.Artists.Add(artist);
+                //db.SaveChanges();
 
-                Album album = new Album();
-                album.AlbumTitle = "wfwf";
-                album.ArtistID = artist.ArtistID;
-                album.Rating = 5;
-                album.Year = 2015;
-                db.Albums.Add(album);
-                db.SaveChanges();
+                //Album album = new Album();
+                //album.AlbumTitle = "wfwf";
+                //album.ArtistID = artist.ArtistID;
+                //album.Rating = 5;
+                //album.Year = 2015;
+                //db.Albums.Add(album);
+                //db.SaveChanges();
 
-                List<Artist> artistResultList = db.Artists.Where(a => a.ArtistName.Contains("Car")).ToList();
+                //List<Artist> artistResultList = db.Artists.Where(a => a.ArtistName.Contains("Car")).ToList();
             }
         }
     }
