@@ -76,11 +76,14 @@ namespace CDCatalogDataModel
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Album> albumList = new List<Album>();
                 try
                 {
-                    albumList = db.Albums.Where(a => a.AlbumID == editedAlbum.AlbumID).ToList();
-                    albumList[0] = editedAlbum;
+                    Album alb = db.Albums.Where(a => a.AlbumID.Equals(editedAlbum.AlbumID)).First();
+                    alb.AlbumTitle = editedAlbum.AlbumTitle;
+                    alb.Rating = editedAlbum.Rating;
+                    alb.Year = editedAlbum.Year;
+                    alb.Artist = editedAlbum.Artist;
+                    alb.Songs = editedAlbum.Songs;
                     db.SaveChanges();
                     success = true;
                 }
@@ -246,11 +249,11 @@ namespace CDCatalogDataModel
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Genre> genreList = new List<Genre>();
                 try
                 {
-                    genreList = db.Genres.Where(g => g.GenreID == editedGenre.GenreID).ToList();
-                    genreList[0] = editedGenre;
+                    Genre gen = db.Genres.Where(g => g.GenreID.Equals(editedGenre.GenreID)).First();
+                    gen.GenreName = editedGenre.GenreName;
+                    gen.Songs = editedGenre.Songs;
                     db.SaveChanges();
                     success = true;
                 }
@@ -309,7 +312,8 @@ namespace CDCatalogDataModel
             {
                 try
                 {
-                    db.Playlists.Remove(playlistToDelete);
+                    Playlist play = db.Playlists.Where(p => p.PlaylistID.Equals(playlistToDelete.PlaylistID)).First();
+                    db.Playlists.Remove(play);
                     db.SaveChanges();
                     success = true;
                 }
@@ -328,11 +332,11 @@ namespace CDCatalogDataModel
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Playlist> playlistList = new List<Playlist>();
                 try
                 {
-                    playlistList = db.Playlists.Where(p => p.PlaylistID == editedPlaylist.PlaylistID).ToList();
-                    playlistList[0] = editedPlaylist;
+                    Playlist play = db.Playlists.Where(p => p.PlaylistID.Equals(editedPlaylist.PlaylistID)).First();
+                    play.PlaylistName = editedPlaylist.PlaylistName;
+                    play.PlaylistSongs = editedPlaylist.PlaylistSongs;
                     db.SaveChanges();
                     success = true;
                 }
@@ -412,11 +416,17 @@ namespace CDCatalogDataModel
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Song> songList = new List<Song>();
                 try
                 {
-                    songList = db.Songs.Where(s => s.SongID == editedSong.SongID).ToList();
-                    songList[0] = editedSong;
+                    Song son = db.Songs.Where(s => s.SongID.Equals(editedSong.SongID)).First();
+                    son.SongTitle = editedSong.SongTitle;
+                    son.Album = editedSong.Album;
+                    son.Artist = editedSong.Artist;
+                    son.Genre = editedSong.Genre;
+                    son.PlaylistSongs = editedSong.PlaylistSongs;
+                    son.Rating = editedSong.Rating;
+                    son.TrackLength = editedSong.TrackLength;
+                    son.TrackNumber = editedSong.TrackNumber;
                     db.SaveChanges();
                     success = true;
                 }
