@@ -55,7 +55,9 @@ namespace CDCatalogDataModel
             {
                 try
                 {
-                    db.Albums.Remove(albumToDelete);
+                    Album alb = db.Albums.Where(a => a.AlbumID.Equals(albumToDelete.AlbumID)).First();
+
+                    db.Albums.Remove(alb);
                     db.SaveChanges();
                     success = true;
                 }
@@ -134,10 +136,12 @@ namespace CDCatalogDataModel
         {
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
-            {
+            { 
                 try
                 {
-                    db.Artists.Remove(artistToDelete);
+                    Artist art = db.Artists.Where(a => a.ArtistID.Equals(artistToDelete.ArtistID)).First();
+
+                    db.Artists.Remove(art);
                     db.SaveChanges();
                     success = true;
                 }
@@ -156,11 +160,13 @@ namespace CDCatalogDataModel
             bool success = false;
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Artist> artistList = new List<Artist>();
                 try
                 {
-                    artistList = db.Artists.Where(a => a.ArtistID == editedArtist.ArtistID).ToList();
-                    artistList[0] = editedArtist;
+                    Artist art = db.Artists.Where(a => a.ArtistID.Equals(editedArtist.ArtistID)).First();
+
+                    art.ArtistName = editedArtist.ArtistName;
+                    art.Albums = editedArtist.Albums;
+                    art.Songs = editedArtist.Songs;
                     db.SaveChanges();
                     success = true;
                 }
@@ -219,7 +225,9 @@ namespace CDCatalogDataModel
             {
                 try
                 {
-                    db.Genres.Remove(genreToDelete);
+                    Genre gen = db.Genres.Where(g => g.GenreID.Equals(genreToDelete.GenreID)).First();
+
+                    db.Genres.Remove(gen);
                     db.SaveChanges();
                     success = true;
                 }
@@ -383,7 +391,9 @@ namespace CDCatalogDataModel
             {
                 try
                 {
-                    db.Songs.Remove(songToDelete);
+                    Song son = db.Songs.Where(s => s.SongID.Equals(songToDelete.SongID)).First();
+
+                    db.Songs.Remove(son);
                     db.SaveChanges();
                     success = true;
                 }

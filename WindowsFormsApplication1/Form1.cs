@@ -42,7 +42,17 @@ namespace WindowsFormsApplication1
 
                 ////Select genres
                 //List<Genre> genres = db.Genres.OrderBy(g => g.GenreName).ToList();
-                //listBox1.DataSource = genres;
+                List<Artist> artists = db.Artists.OrderBy(a => a.ArtistName).ToList();
+                listBox1.DataSource = artists;
+
+                foreach (Artist a in artists)
+                {
+                    if (a.ArtistName == "Updated Test Artist")
+                    {
+                        db.Artists.Remove(a);
+                        db.SaveChanges();
+                    }
+                }
 
 
                 //Artist artist = new Artist();
