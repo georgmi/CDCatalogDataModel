@@ -20,16 +20,20 @@ namespace CDCatalogTester
 
         Artist testArtist = new Artist();
         Artist editedTestArtist = new Artist();
+
         Genre testGenre = new Genre();
+        Genre editedTestGenre = new Genre();
+
         Album testAlbum = new Album();
+        Album editedTestAlbum = new Album();
+
         Song testSong = new Song();
+        Song editedTestSong = new Song();
 
         [SetUp]
         public void Initialize()
         {
             testArtist.ArtistName = "Test and the Artists";
-
-            editedTestArtist.ArtistName = "Misspelled Test Artist";
 
             testGenre.GenreName = "Test Genre";
 
@@ -39,8 +43,100 @@ namespace CDCatalogTester
             testSong.SongTitle = "I'll Have a Blue Testmas Without You";
             testSong.TrackNumber = 1;
             testSong.TrackLength = 325.0;
+
+            editedTestArtist.ArtistName = "Misspelled Test Atrist";
+            CDCatalogManager.AddArtist(editedTestArtist);
+
+            editedTestGenre.GenreName = "Misspelled Gerne";
+            CDCatalogManager.AddGenre(editedTestGenre);
+
+            editedTestAlbum.AlbumTitle = "Misspelled Ablum";
+            artistList.Clear();
+            artistList = CDCatalogManager.GetArtists();
+            foreach (Artist a in artistList)
+            {
+                if (a.ArtistName == editedTestArtist.ArtistName)
+                {
+                    editedTestAlbum.Artist = a;
+                }
+            }
+            CDCatalogManager.AddAlbum(editedTestAlbum);
+
+            editedTestSong.SongTitle = "Misspelled Snog";
+            editedTestSong.TrackLength = 240.0;
+            editedTestSong.TrackNumber = 1;
+            foreach (Artist a in artistList)
+            {
+                if (a.ArtistName == editedTestArtist.ArtistName)
+                {
+                    editedTestSong.Artist = a;
+                }
+            }
+
+            genreList.Clear();
+            genreList = CDCatalogManager.GetGenres();
+            foreach(Genre g in genreList)
+            {
+                if (g.GenreName == editedTestGenre.GenreName)
+                {
+                    editedTestSong.Genre = g;
+                }
+            }
+
+            albumList.Clear();
+            albumList = CDCatalogManager.GetAlbums();
+            foreach(Album a in albumList)
+            {
+                if (a.AlbumTitle == editedTestAlbum.AlbumTitle)
+                {
+                    editedTestSong.Album = a;
+                }
+            }
+            CDCatalogManager.AddSong(editedTestSong);
+
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            songList = CDCatalogManager.GetSongs();
+            foreach (Song s in songList)
+            {
+                if (s.SongTitle == "Foxed Song" || s.SongTitle == "Misspelled Snog")
+                {
+                    CDCatalogManager.DeleteSong(s);
+                }
+            }
+
+            albumList = CDCatalogManager.GetAlbums();
+            foreach(Album a in albumList)
+            {
+                if (a.AlbumTitle == "Fixed Album" || a.AlbumTitle == "Misspelled Ablum")
+                {
+                    CDCatalogManager.DeleteAlbum(a);
+                }
+            }
+
+            artistList = CDCatalogManager.GetArtists();
+            foreach(Artist a in artistList)
+            {
+                if (a.ArtistName == "Fixed Artist" || a.ArtistName == "Misspelled Test Atrist")
+                {
+                    CDCatalogManager.DeleteArtist(a);
+                }
+            }
+
+            genreList = CDCatalogManager.GetGenres();
+            foreach(Genre g in genreList)
+            {
+                if (g.GenreName == "Fixed Genre" || g.GenreName =="Misspelled Gerne")
+                {
+                    CDCatalogManager.DeleteGenre(g);
+                }
+            }
+        }
+    
+    
         [Test]
         public void AddAnArtist()
         {
@@ -325,7 +421,7 @@ namespace CDCatalogTester
             {
                 if (a.ArtistName == editedTestArtist.ArtistName)
                 {
-                    a.ArtistName = "Updated Test Artist";
+                    a.ArtistName = "Fixed Artist";
                     result = CDCatalogManager.UpdateArtist(a);
                 }
             }
@@ -344,7 +440,7 @@ namespace CDCatalogTester
 
             foreach (Artist a in artistList)
             {
-                if (a.ArtistName == "Updated Test Artist")
+                if (a.ArtistName == "Fixed Artist")
                 {
                     result = CDCatalogManager.DeleteArtist(a);
                 }
@@ -353,6 +449,67 @@ namespace CDCatalogTester
             Assert.IsTrue(result);
         }
 
+        [Test]
+        public void EditAnAlbum()
+        {
+            bool result = false;
 
+            albumList.Clear();
+            albumList = CDCatalogManager.GetAlbums();
+            foreach(Album a in albumList)
+            {
+                if (a.AlbumTitle == editedTestAlbum.AlbumTitle)
+                {
+                    a.AlbumTitle = "Fixed Album";
+                    result = CDCatalogManager.UpdateAlbum(a);
+                }
+            }
+
+            Assert.IsNotEmpty(albumList);
+            Assert.IsTrue(result);
+
+        }
+
+        [Test]
+        public void EditAGenre()
+        {
+            bool result = false;
+
+            genreList.Clear();
+            genreList = CDCatalogManager.GetGenres();
+
+            foreach(Genre g in genreList)
+            {
+                if (g.GenreName == editedTestGenre.GenreName)
+                {
+                    g.GenreName = "Fixed Genre";
+                    result = CDCatalogManager.UpdateGenre(g);
+                }
+            }
+
+            Assert.IsNotEmpty(genreList);
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void EditASong()
+        {
+            bool result = false;
+
+            songList.Clear();
+            songList = CDCatalogManager.GetSongs();
+
+            foreach(Song s in songList)
+            {
+                if (s.SongTitle == editedTestSong.SongTitle)
+                {
+                    s.SongTitle = "Foxed Song";
+                    result = CDCatalogManager.UpdateSong(s);
+                }
+            }
+
+            Assert.IsNotEmpty(songList);
+            Assert.IsTrue(result);
+        }
     }
 }
