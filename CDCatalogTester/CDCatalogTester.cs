@@ -136,6 +136,15 @@ namespace CDCatalogTester
             }
         }
     
+        [Test]
+        public void AddAPlaylist()
+        {
+            Playlist playlist = new Playlist();
+            playlist.PlaylistName = "nUnit Playlist";
+            CDCatalogManager.AddPlaylist(playlist);
+
+            Assert.IsNotNull(playlist.PlaylistID);
+        }
     
         [Test]
         public void AddAnArtist()

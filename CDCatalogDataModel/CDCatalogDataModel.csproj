@@ -71,6 +71,7 @@
       <DependentUpon>CDCatalogModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="CDCatalogManager.cs" />
+    <Compile Include="CDCatalogProcess.cs" />
     <Compile Include="Genre.cs">
       <DependentUpon>CDCatalogModel.tt</DependentUpon>
     </Compile>

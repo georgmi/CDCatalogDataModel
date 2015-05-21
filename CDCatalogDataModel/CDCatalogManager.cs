@@ -446,6 +446,7 @@ namespace CDCatalogDataModel
             }
 
         }
+
         public static List<PlaylistSong> GetPlaylistSongs()
         {
             using (CDCatalogEntities db = new CDCatalogEntities())

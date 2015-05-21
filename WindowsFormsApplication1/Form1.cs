@@ -13,6 +13,8 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
+        //A scratch UI to support testing and exploration of solutions. The final UI will be built in WPF.
+
         List<Album> albumList = new List<Album>();
 
         public Form1()
@@ -581,30 +583,38 @@ namespace WindowsFormsApplication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            using (CDCatalogEntities db = new CDCatalogEntities())
+            CDCatalogProcess.GeneratePlayList("Winforms Test Playlist", 120);
+
+            Playlist playlist = CDCatalogManager.GetPlaylists().Where(p => p.PlaylistName.Equals("Winforms Test Playlist")).Last();
+            List<PlaylistSong> pl = CDCatalogManager.GetPlaylistSongs().Where(p => p.PlaylistID.Equals(playlist.PlaylistID)).ToList();
+            List<Song> songs = new List<Song>();
+
+            foreach (PlaylistSong pls in pl)
             {
-                Playlist playList = new Playlist();
-                playList.PlaylistName = "Test Playlist";
-                db.Playlists.Add(playList);
-                db.SaveChanges();
-
-                List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
-                double targetMinutes = 120;
-                double targetSeconds = (targetMinutes * 60);
-
-                List<Song> songList = db.Songs.OrderByDescending(s => s.TrackLength).ToList();
-
-                playlistSongList = RandomPlaylist(songList, targetSeconds, playList);
-
-                List<PlaylistSong> pl = db.PlaylistSongs.Where(p => p.PlaylistID.Equals(playList.PlaylistID)).ToList();
-                List<Song> songs = new List<Song>();
-                foreach(PlaylistSong pls in pl)
-                {
-                    songs.Add(pls.Song);
-                }
-
-                dataGridView1.DataSource = songs;
+                songs.Add(CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First());
             }
+
+            dataGridView1.DataSource = songs;
+
+
+            //using (CDCatalogEntities db = new CDCatalogEntities())
+            //{
+            //    Playlist playList = new Playlist();
+            //    playList.PlaylistName = "Test Playlist";
+            //    db.Playlists.Add(playList);
+            //    db.SaveChanges();
+
+            //    List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
+            //    double targetMinutes = 12000;
+            //    double targetSeconds = (targetMinutes * 60);
+
+            //    List<Song> songList = db.Songs.OrderByDescending(s => s.TrackLength).ToList();
+
+            //    playlistSongList = RandomPlaylist(songList, targetSeconds, playList);
+
+            //    List<PlaylistSong> pl = db.PlaylistSongs.Where(p => p.PlaylistID.Equals(playList.PlaylistID)).ToList();
+            //    List<Song> songs = new List<Song>();
+            //}
         }
 
         private List<PlaylistSong> RandomPlaylist(List<Song> sourceList, double targetSeconds, Playlist playList)
@@ -621,6 +631,7 @@ namespace WindowsFormsApplication1
 
             bool keepGoing = true;
             bool isFull = false;
+            bool notEnoughSongs = false;
             int iterator = 0;
             int index = 0;
             int songOrder = 1;
@@ -630,19 +641,28 @@ namespace WindowsFormsApplication1
             List<Song> filteredList = songList.Where(s => s.TrackLength <= ((targetSeconds + 60) - totalLength)).ToList();
             List<Song> workingList = new List<Song>();
 
-            //checking the iterator keeps this from becoming an infonite loop, 
+            //checking the iterator keeps this from becoming an infinite loop, 
             //but all testing, even with fairly small datasets, has so far found
             //a solution before the iterator iterates out.
             while (iterator < 1000000000 && keepGoing == true) 
             {
-                while (totalLength <= (targetSeconds + 60) && isFull == false && filteredList.Count > 0) //If we're out of songs, we can't add any more to the playlist
+                while (totalLength <= (targetSeconds + 60) && isFull == false && notEnoughSongs == false) 
                 {
                     //reduce the available songs to only those which will not exceed the specifid playlist length plus one minute.
                     filteredList = songList.Where(s => s.TrackLength <= ((targetSeconds + 60) - totalLength)).ToList();
-                    index = rand.Next(0, filteredList.Count);
-                    workingList.Add(songList[index]);
-                    totalLength += songList[index].TrackLength;
-                    songList.RemoveAt(index);
+
+                    if (filteredList.Count > 0) //If we're out of songs, we can't add any more to the playlist
+                    {
+                        index = rand.Next(0, filteredList.Count);
+                        workingList.Add(songList[index]);
+                        totalLength += songList[index].TrackLength;
+                        songList.RemoveAt(index);
+                    }
+                    else
+                    {
+                        notEnoughSongs = true;
+                        keepGoing = false;
+                    }
 
                     if(totalLength >= (targetSeconds - 60))
                     {
