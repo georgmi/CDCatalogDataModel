@@ -8,6 +8,13 @@ namespace CDCatalogDataModel
 {
     //TODO: Prevent duplicate records being entered into the database.
 
+    //TODO: When creating items in the database, assign foreign key IDs 
+    //instead of foreign objects. (check behavior of both approaches.)
+
+    //Data point: When you db.Table.Add(object) => db.SaveChanges(), the 
+    //object you added gets updated with the objectID key value created
+    //by the database.
+
     public class CDCatalogManager
     {
         public static List<Album> GetAlbums()
@@ -433,6 +440,83 @@ namespace CDCatalogDataModel
                 catch (Exception e)
                 {
                     throw e;
+                    //TODO: Figure out what to do with an exception. 
+                }
+                return success;
+            }
+
+        }
+        public static List<PlaylistSong> GetPlaylistSongs()
+        {
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
+                try
+                {
+                    playlistSongList = db.PlaylistSongs.OrderBy(p => p.SongOrder).ToList();
+                }
+                catch
+                {
+                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                }
+                return playlistSongList;
+            }
+        }
+
+        public static bool AddPlaylistSong(PlaylistSong newPlaylistSong)
+        {
+            bool success = false;
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                try
+                {
+                    db.PlaylistSongs.Add(newPlaylistSong);
+                    db.SaveChanges();
+                    success = true;
+                }
+                catch
+                {
+                    //TODO: Figure out what to do with an exception. 
+                }
+                return success;
+            }
+        }
+
+        public static bool DeletePlaylistSong(PlaylistSong playlistSongToDelete)
+        {
+            bool success = false;
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                try
+                {
+                    db.PlaylistSongs.Remove(playlistSongToDelete);
+                    db.SaveChanges();
+                    success = true;
+                }
+                catch
+                {
+                    //TODO: Figure out what to do with an exception. 
+                }
+                return success;
+            }
+
+        }
+
+        public static bool UpdatePlaylistSong(PlaylistSong editedPlaylistSong)
+        {
+            bool success = false;
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                try
+                {
+                    PlaylistSong playlistSong = db.PlaylistSongs.Where(p => p.PlaylistID.Equals(editedPlaylistSong.PlaylistID)
+                        && p.SongID.Equals(editedPlaylistSong.SongID)).First();
+                    playlistSong.SongOrder = editedPlaylistSong.SongOrder;
+                    db.SaveChanges();
+                    success = true;
+                }
+                catch
+                {
                     //TODO: Figure out what to do with an exception. 
                 }
                 return success;

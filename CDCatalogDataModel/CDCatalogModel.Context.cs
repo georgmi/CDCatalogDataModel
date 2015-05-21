@@ -32,6 +32,5 @@ namespace CDCatalogDataModel
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<PlaylistSong> PlaylistSongs { get; set; }
         public DbSet<Song> Songs { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

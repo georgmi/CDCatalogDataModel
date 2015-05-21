@@ -84,9 +84,6 @@
     <Compile Include="Song.cs">
       <DependentUpon>CDCatalogModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>CDCatalogModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

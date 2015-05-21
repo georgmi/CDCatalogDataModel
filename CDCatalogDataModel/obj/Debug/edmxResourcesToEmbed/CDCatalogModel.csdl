@@ -7,7 +7,6 @@
     <EntitySet Name="Playlists" EntityType="CDCatalogModel.Playlist" />
     <EntitySet Name="PlaylistSongs" EntityType="CDCatalogModel.PlaylistSong" />
     <EntitySet Name="Songs" EntityType="CDCatalogModel.Song" />
-    <EntitySet Name="sysdiagrams" EntityType="CDCatalogModel.sysdiagram" />
     <AssociationSet Name="FK_Album_Artist" Association="CDCatalogModel.FK_Album_Artist">
       <End Role="Artist" EntitySet="Artists" />
       <End Role="Album" EntitySet="Albums" />
@@ -86,7 +85,7 @@
       <PropertyRef Name="SongID" />
     </Key>
     <Property Name="SongID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="SongTitle" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="SongTitle" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
     <Property Name="ArtistID" Type="Int32" Nullable="false" />
     <Property Name="AlbumID" Type="Int32" />
     <Property Name="TrackNumber" Type="Int32" Nullable="false" />
@@ -97,16 +96,6 @@
     <NavigationProperty Name="Artist" Relationship="CDCatalogModel.FK_Song_Artist" FromRole="Song" ToRole="Artist" />
     <NavigationProperty Name="Genre" Relationship="CDCatalogModel.FK_Song_Genre" FromRole="Song" ToRole="Genre" />
     <NavigationProperty Name="PlaylistSongs" Relationship="CDCatalogModel.FK_PlaylistSong_Song" FromRole="Song" ToRole="PlaylistSong" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="FK_Album_Artist">
     <End Role="Artist" Type="CDCatalogModel.Artist" Multiplicity="1" />

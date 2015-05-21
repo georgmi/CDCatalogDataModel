@@ -57,7 +57,7 @@ namespace CDCatalogTester
             {
                 if (a.ArtistName == editedTestArtist.ArtistName)
                 {
-                    editedTestAlbum.Artist = a;
+                    editedTestAlbum.ArtistID = a.ArtistID;
                 }
             }
             CDCatalogManager.AddAlbum(editedTestAlbum);
@@ -69,7 +69,7 @@ namespace CDCatalogTester
             {
                 if (a.ArtistName == editedTestArtist.ArtistName)
                 {
-                    editedTestSong.Artist = a;
+                    editedTestSong.ArtistID = a.ArtistID;
                 }
             }
 
@@ -79,7 +79,7 @@ namespace CDCatalogTester
             {
                 if (g.GenreName == editedTestGenre.GenreName)
                 {
-                    editedTestSong.Genre = g;
+                    editedTestSong.GenreID = g.GenreID;
                 }
             }
 
@@ -89,7 +89,7 @@ namespace CDCatalogTester
             {
                 if (a.AlbumTitle == editedTestAlbum.AlbumTitle)
                 {
-                    editedTestSong.Album = a;
+                    editedTestSong.AlbumID = a.AlbumID;
                 }
             }
             CDCatalogManager.AddSong(editedTestSong);
@@ -197,7 +197,7 @@ namespace CDCatalogTester
             {
                 if(a.ArtistName == testArtist.ArtistName)
                 {
-                    testAlbum.Artist = a;
+                    testAlbum.ArtistID = a.ArtistID;
                 }
             }
 
@@ -237,7 +237,7 @@ namespace CDCatalogTester
             {
                 if (a.ArtistName == testArtist.ArtistName)
                 {
-                    testSong.Artist = a;
+                    testSong.ArtistID = a.ArtistID;
                 }
             }
 
@@ -245,7 +245,7 @@ namespace CDCatalogTester
             {
                 if (a.AlbumTitle == testAlbum.AlbumTitle)
                 {
-                    testSong.Album = a;
+                    testSong.AlbumID = a.AlbumID;
                 }
             }
             
@@ -253,7 +253,7 @@ namespace CDCatalogTester
             {
                 if (g.GenreName == testGenre.GenreName)
                 {
-                    testSong.Genre = g;
+                    testSong.GenreID = g.GenreID;
                 }
             }
 
