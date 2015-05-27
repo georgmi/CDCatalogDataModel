@@ -48,14 +48,14 @@
     <EntitySetMapping Name="Songs">
       <EntityTypeMapping TypeName="CDCatalogModel.Song">
         <MappingFragment StoreEntitySet="Song">
-          <ScalarProperty Name="SongID" ColumnName="SongID" />
-          <ScalarProperty Name="SongTitle" ColumnName="SongTitle" />
-          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
-          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
-          <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
-          <ScalarProperty Name="GenreID" ColumnName="GenreID" />
-          <ScalarProperty Name="TrackLength" ColumnName="TrackLength" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="TrackLength" ColumnName="TrackLength" />
+          <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+          <ScalarProperty Name="TrackNumber" ColumnName="TrackNumber" />
+          <ScalarProperty Name="AlbumID" ColumnName="AlbumID" />
+          <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+          <ScalarProperty Name="SongTitle" ColumnName="SongTitle" />
+          <ScalarProperty Name="SongID" ColumnName="SongID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

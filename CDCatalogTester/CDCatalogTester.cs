@@ -42,7 +42,7 @@ namespace CDCatalogTester
 
             testSong.SongTitle = "I'll Have a Blue Testmas Without You";
             testSong.TrackNumber = 1;
-            testSong.TrackLength = 325.0;
+            testSong.TrackLength = 325;
 
             editedTestArtist.ArtistName = "Misspelled Test Atrist";
             CDCatalogManager.AddArtist(editedTestArtist);
@@ -63,7 +63,7 @@ namespace CDCatalogTester
             CDCatalogManager.AddAlbum(editedTestAlbum);
 
             editedTestSong.SongTitle = "Misspelled Snog";
-            editedTestSong.TrackLength = 240.0;
+            editedTestSong.TrackLength = 240;
             editedTestSong.TrackNumber = 1;
             foreach (Artist a in artistList)
             {

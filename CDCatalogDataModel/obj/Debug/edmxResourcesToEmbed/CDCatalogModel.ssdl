@@ -50,7 +50,7 @@
     <Property Name="AlbumID" Type="int" />
     <Property Name="TrackNumber" Type="int" Nullable="false" />
     <Property Name="GenreID" Type="int" Nullable="false" />
-    <Property Name="TrackLength" Type="float" Nullable="false" />
+    <Property Name="TrackLength" Type="int" Nullable="false" />
     <Property Name="Rating" Type="int" />
   </EntityType>
   <Association Name="FK_Album_Artist">

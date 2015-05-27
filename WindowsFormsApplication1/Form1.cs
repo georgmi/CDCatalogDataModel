@@ -588,13 +588,16 @@ namespace WindowsFormsApplication1
             Playlist playlist = CDCatalogManager.GetPlaylists().Where(p => p.PlaylistName.Equals("Winforms Test Playlist")).Last();
             List<PlaylistSong> pl = CDCatalogManager.GetPlaylistSongs().Where(p => p.PlaylistID.Equals(playlist.PlaylistID)).ToList();
             List<Song> songs = new List<Song>();
+            int totalDuration = 0;
 
             foreach (PlaylistSong pls in pl)
             {
                 songs.Add(CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First());
+                totalDuration += (CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First()).TrackLength;
             }
 
             dataGridView1.DataSource = songs;
+            textBox1.Text = "Total playlist duration is " + totalDuration.ToString() + " seconds.";
 
 
             //using (CDCatalogEntities db = new CDCatalogEntities())
@@ -605,8 +608,8 @@ namespace WindowsFormsApplication1
             //    db.SaveChanges();
 
             //    List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
-            //    double targetMinutes = 12000;
-            //    double targetSeconds = (targetMinutes * 60);
+            //    int targetMinutes = 12000;
+            //    int targetSeconds = (targetMinutes * 60);
 
             //    List<Song> songList = db.Songs.OrderByDescending(s => s.TrackLength).ToList();
 
@@ -617,7 +620,7 @@ namespace WindowsFormsApplication1
             //}
         }
 
-        private List<PlaylistSong> RandomPlaylist(List<Song> sourceList, double targetSeconds, Playlist playList)
+        private List<PlaylistSong> RandomPlaylist(List<Song> sourceList, int targetSeconds, Playlist playList)
         {
             ///Algorithm needs to:
             ///1) Check playlist length against target--while totalLength less than or equal to targetSeconds + 60?
@@ -635,7 +638,7 @@ namespace WindowsFormsApplication1
             int iterator = 0;
             int index = 0;
             int songOrder = 1;
-            double totalLength = 0;
+            int totalLength = 0;
 
             List<Song> songList = sourceList.OrderBy(s => s.SongID).ToList();
             List<Song> filteredList = songList.Where(s => s.TrackLength <= ((targetSeconds + 60) - totalLength)).ToList();

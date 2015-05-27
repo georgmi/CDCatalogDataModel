@@ -25,7 +25,7 @@ namespace CDCatalogDataModel
         public Nullable<int> AlbumID { get; set; }
         public int TrackNumber { get; set; }
         public int GenreID { get; set; }
-        public double TrackLength { get; set; }
+        public int TrackLength { get; set; }
         public Nullable<int> Rating { get; set; }
     
         public virtual Album Album { get; set; }

@@ -10,13 +10,13 @@
         <EntityTypeShape EntityType="CDCatalogModel.Genre" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CDCatalogModel.Playlist" Width="1.5" PointX="5.25" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="CDCatalogModel.PlaylistSong" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="CDCatalogModel.Song" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="CDCatalogModel.FK_Album_Artist" ManuallyRouted="false" />
-        <AssociationConnector Association="CDCatalogModel.FK_Song_Album" ManuallyRouted="false" />
-        <AssociationConnector Association="CDCatalogModel.FK_Song_Artist" ManuallyRouted="false" />
-        <AssociationConnector Association="CDCatalogModel.FK_Song_Genre" ManuallyRouted="false" />
         <AssociationConnector Association="CDCatalogModel.FK_PlaylistSong_Playlist" ManuallyRouted="false" />
-        <AssociationConnector Association="CDCatalogModel.FK_PlaylistSong_Song" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CDCatalogModel.Song" Width="1.5" PointX="5.25" PointY="1.875" />
+        <AssociationConnector Association="CDCatalogModel.FK_Song_Album" />
+        <AssociationConnector Association="CDCatalogModel.FK_Song_Artist" />
+        <AssociationConnector Association="CDCatalogModel.FK_Song_Genre" />
+        <AssociationConnector Association="CDCatalogModel.FK_PlaylistSong_Song" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
