@@ -153,7 +153,7 @@ namespace CDCatalogDataModel
 
             //If all else fails, return the original list of songs.
             //HOPEFULLY, the only time we'll hit this is if the input song list is so short that it'll
-            //be quick to bottom out on the recursion.
+            //be quick to bottom out on the recursion. Otherwise, the user's likely to be pretty unhappy with the wait.
             return workingList.ToList();  
             
         }

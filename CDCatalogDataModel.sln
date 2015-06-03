@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApplication1", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDCatalogTester", "CDCatalogTester\CDCatalogTester.csproj", "{BAA44F15-EB3C-4393-BEA4-C69064C9E464}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDCatalogUI", "CDCatalogUI\CDCatalogUI.csproj", "{ACD5C7BE-338C-48FF-89C2-3CEC8BD1E872}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{BAA44F15-EB3C-4393-BEA4-C69064C9E464}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAA44F15-EB3C-4393-BEA4-C69064C9E464}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAA44F15-EB3C-4393-BEA4-C69064C9E464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACD5C7BE-338C-48FF-89C2-3CEC8BD1E872}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACD5C7BE-338C-48FF-89C2-3CEC8BD1E872}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACD5C7BE-338C-48FF-89C2-3CEC8BD1E872}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACD5C7BE-338C-48FF-89C2-3CEC8BD1E872}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

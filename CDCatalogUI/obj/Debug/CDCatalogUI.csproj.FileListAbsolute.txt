@@ -1,0 +1,17 @@
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.csprojResolveAssemblyReference.cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\MainWindow.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\MainWindow.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\App.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI_MarkupCompile.cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.g.resources
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.Properties.Resources.resources
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.csproj.GenerateResource.Cache
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\CDCatalogUI.exe.config
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\CDCatalogUI.exe
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\CDCatalogUI.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\EntityFramework.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\EntityFramework.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.exe
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.pdb

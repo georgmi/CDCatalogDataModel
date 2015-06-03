@@ -1,0 +1,81 @@
+﻿<Window x:Class="CDCatalogUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CD Catalog" Height="703" Width="933">
+    <Grid>
+        <Grid Name="gridViewOptions">
+            <!--View collection by album, artist, or genre-->
+            <Label x:Name="lblViewOptions" Content="View collection by:" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsAll" Content="All Songs" HorizontalAlignment="Left" Margin="35,50,0,0" VerticalAlignment="Top" Checked="rbViewOptionsAll_Checked"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsCD" Content="Album" HorizontalAlignment="Left" Margin="35,70,0,0" VerticalAlignment="Top" Checked="rbViewOptionsCD_Checked"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsArtist" Content="Artist" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top" Checked="rbViewOptionsArtist_Checked"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsGenre" Content="Genre" HorizontalAlignment="Left" Margin="35,110,0,0" VerticalAlignment="Top" Checked="rbViewOptionsGenre_Checked"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsPlaylist" Content="Playlist" HorizontalAlignment="Left" Margin="35,130,0,0" VerticalAlignment="Top" Checked="rbViewOptionsPlaylist_Checked"/>
+        </Grid>
+        
+        <Grid Name="gridAddItems">
+            <!--Add items to the database-->
+            <Label x:Name="lblAddNew" Content="Add New..." HorizontalAlignment="Left" Margin="180,25,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnAddNewSong" Content="Song" HorizontalAlignment="Left" Margin="250,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewAlbum" Content="Album" HorizontalAlignment="Left" Margin="310,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewArtist" Content="Artist" HorizontalAlignment="Left" Margin="370,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewGenre" Content="Genre" HorizontalAlignment="Left" Margin="430,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewPlaylist" Content="Playlist" HorizontalAlignment="Left" Margin="490,25,0,0" VerticalAlignment="Top" Width="50"/>
+        </Grid>
+        
+        <Grid Name="gridSelection">
+            <!--Selection ListBox for when a filter is selected-->
+            <Label x:Name="lblFilter" Content="No filter selected" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ListBox x:Name="listBoxFilterList" HorizontalAlignment="Left" Height="30" Margin="35,180,0,0" VerticalAlignment="Top" Width="300"/>
+        </Grid>
+
+        <Grid Name="gridAlbumActions" Visibility="Hidden">
+            <!--Actions to perform on selected Albums-->
+            <Label x:Name="lblAlbumActions" Content="Do this to selected album:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnEditAlbum" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnDeleteAlbum" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnRateAlbum" Content="Rate" HorizontalAlignment="Left" Margin="485,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
+        </Grid>
+        
+        <Grid Name="gridArtistActions" Visibility="Hidden">
+            <!--Actions to perform on selected Artist-->
+            <Label x:Name="lblArtistActions" Content="Do this to selected artist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnEditArtist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnDeleteArtist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
+        </Grid>
+
+        <Grid Name="gridGenreActions" Visibility="Hidden">
+            <!--Actions to perform on selected Genre-->
+            <Label x:Name="lblGenreActions" Content="Do this to selected genre:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnEditGenre" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnDeleteGenre" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
+        </Grid>
+
+        <Grid Name="gridPlaylistActions" Visibility="Hidden">
+            <!--Actions to perform on selected Playlist-->
+            <Label x:Name="lblPlaylistActions" Content="Do this to selected playlist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnEditPlaylist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnDeletePlaylist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
+        </Grid>
+
+        <Grid Name="gridSongActions">
+            <!--Actions to perform on selected songs-->
+            <Label x:Name="lblSongActions" Content="Do this to selected song:" HorizontalAlignment="Left" Margin="20,225,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btnEditSong" Content="Edit" HorizontalAlignment="Left" Margin="175,225,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnRateSong" Content="Rate" HorizontalAlignment="Left" Margin="295,225,0,0" VerticalAlignment="Top" Width="50"/>
+            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="50"/>-->
+        </Grid>
+
+        <Grid Name="gridSongList">
+            <!--Selection ListBox to display songs-->
+            <!--<Label x:Name="lblSongList" Content="Songs:" HorizontalAlignment="Left" Margin="20,225,0,0" VerticalAlignment="Top"/>-->
+            <ListBox x:Name="listBoxSongList" HorizontalAlignment="Left" Height="400" Margin="35,250,0,0" VerticalAlignment="Top" Width="850"/>
+        </Grid>
+        
+    </Grid>
+</Window>
