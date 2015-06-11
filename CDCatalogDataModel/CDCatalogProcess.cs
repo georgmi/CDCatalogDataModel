@@ -8,6 +8,174 @@ namespace CDCatalogDataModel
 {
     public class CDCatalogProcess
     {
+        public static List<Song> displaySongList = new List<Song>();
+        public static List<Song> filteredSongList = new List<Song>();
+        public static List<Album> filterAlbumList = new List<Album>();
+        public static List<Artist> filterArtistList = new List<Artist>();
+        public static List<Genre> filterGenreList = new List<Genre>();
+        public static List<Playlist> filterPlaylistList = new List<Playlist>();
+
+        public static List<Artist> subWindowArtistList = new List<Artist>();
+        public static List<Album> subWindowAlbumList = new List<Album>();
+        public static List<Genre> subWindowGenreList = new List<Genre>();
+        public static List<Song> subWindowPlaylistSongs = new List<Song>();
+
+        public static void GetAllAlbums()
+        {
+            filterAlbumList = CDCatalogManager.GetAlbums();
+        }
+
+        public static void GetAllArtists()
+        {
+            filterArtistList = CDCatalogManager.GetArtists();
+        }
+
+        public static void GetAllGenres()
+        {
+            filterGenreList = CDCatalogManager.GetGenres();
+        }
+
+        public static void GetAllPlaylists()
+        {
+            filterPlaylistList = CDCatalogManager.GetPlaylists();
+        }
+
+        public static void GetAllSongs()
+        {
+            displaySongList = CDCatalogManager.GetSongs();
+        }
+
+        public static void FilterSongsByAlbum(Album album)
+        {
+            filteredSongList.Clear();
+            filteredSongList = displaySongList.Where(s => s.AlbumID == album.AlbumID).ToList();
+        }
+
+        public static void FilterSongsByArtist(Artist artist)
+        {
+            filteredSongList.Clear();
+            filteredSongList = displaySongList.Where(s => s.ArtistID == artist.ArtistID).ToList();
+        }
+
+        public static void FilterSongsByGenre(Genre genre)
+        {
+            filteredSongList.Clear();
+            filteredSongList = displaySongList.Where(s => s.GenreID == genre.GenreID).ToList();
+        }
+
+        public static void FilterSongsByPlaylist(Playlist playlist)
+        {
+            filteredSongList.Clear();
+            filteredSongList = CDCatalogManager.GetSongsFromPlaylist(playlist);
+        }
+
+        public static void FilterAlbumsByArtist(Artist artist)
+        {
+            subWindowAlbumList.Clear();
+            subWindowAlbumList = CDCatalogManager.GetAlbums().Where(alb => alb.ArtistID.Equals(artist.ArtistID)).ToList();
+        }
+
+        public static void FilterArtistsByAlbum(Album album)
+        {
+            int artistID = album.ArtistID;
+            subWindowArtistList.Clear();
+            subWindowArtistList = CDCatalogManager.GetArtists().Where(art => art.ArtistID.Equals(artistID)).ToList();
+            subWindowAlbumList.Clear();
+            subWindowAlbumList = CDCatalogManager.GetAlbums().Where(alb => alb.ArtistID.Equals(artistID)).ToList();
+        }
+
+        public static void RefreshMainWindowLists()
+        {
+            GetAllAlbums();
+            GetAllArtists();
+            GetAllGenres();
+            GetAllPlaylists();
+            GetAllSongs();
+        }
+
+        public static void AddSongsFillArtists()
+        {
+            subWindowArtistList.Clear();
+            subWindowArtistList = CDCatalogManager.GetArtists();
+        }
+
+        public static void AddSongsFillAlbums()
+        {
+            subWindowAlbumList.Clear();
+            subWindowAlbumList = CDCatalogManager.GetAlbums();
+        }
+
+        public static void AddSongsFillGenres()
+        {
+            subWindowGenreList.Clear();
+            subWindowGenreList = CDCatalogManager.GetGenres();
+        }
+
+        public static int CreatePlaylistValidateLength(string length)
+        {
+            int output = 0;
+
+            int.TryParse(length, out output);
+
+            if (output < 1)
+            {
+                output = 0;
+            }
+
+            return output;
+        }
+
+        public static int CreatePlaylistGo(string playListName, int minutes)
+        {
+            subWindowPlaylistSongs.Clear();
+            Song song = null;
+            int totalDuration = 0;
+            if (minutes > 0)
+            {
+                List<PlaylistSong> playlistSongList = GeneratePlayList(playListName, minutes).OrderBy(pls => pls.SongOrder).ToList();
+                for (int i = 0; i < playlistSongList.Count; i++)
+                {
+                    PlaylistSong pls = playlistSongList[i];
+                    song = CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First();
+                    subWindowPlaylistSongs.Add(song);
+                    totalDuration += song.TrackLength;
+                }
+            }
+            return totalDuration;
+        }
+
+        public static void AddGenreGo(string genreName)
+        {
+            int doesGenreExist = CDCatalogManager.GetGenres().Where(g => g.GenreName.Equals(genreName)).Count();
+            if (doesGenreExist == 0)
+            {
+                Genre genre = new Genre();
+                genre.GenreName = genreName;
+                CDCatalogManager.AddGenre(genre);
+            }
+            else
+            {
+                //TODO: Message to user? Or not, because the genre they tried to add is in the database, 
+                //which is what they wanted.
+            }
+        }
+
+        public static void AddArtistGo(string artistName)
+        {
+            int doesArtistExist = CDCatalogManager.GetArtists().Where(a => a.ArtistName.Equals(artistName)).Count();
+            if (doesArtistExist == 0)
+            {
+                Artist artist = new Artist();
+                artist.ArtistName = artistName;
+                CDCatalogManager.AddArtist(artist);
+            }
+            else
+            {
+                //TODO: Message to user? Or not, because the genre they tried to add is in the database, 
+                //which is what they wanted.
+            }
+        }
+
         public static List<PlaylistSong> GeneratePlayList(string playListName, int minutes)
         {
             List<PlaylistSong> playlistSongList = new List<PlaylistSong>();

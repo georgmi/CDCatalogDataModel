@@ -1,0 +1,15 @@
+﻿<Window x:Class="CDCatalogUI.CreatePlaylist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Create A Playlist" Height="379" Width="440">
+    <Grid>
+        <Label Content="Name your Playlist:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCreatePlaylistName" HorizontalAlignment="Left" Height="23" Margin="20,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
+        <Label Content="How many minutes should the Playlist run?" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCreatePlaylistMinutes" HorizontalAlignment="Left" Height="23" Margin="20,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label x:Name="lblCreatePlaylistActualLength" Content="" HorizontalAlignment="Left" Margin="150,90,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,-0.154"/>
+        <Button x:Name="btnCreatePlaylistGo" Content="Create Playlist" HorizontalAlignment="Left" Margin="65,120,0,0" VerticalAlignment="Top" Width="85" Click="btnCreatePlaylistGo_Click"/>
+        <Button x:Name="btnCreatePlaylistCancel" Content="Back to Main Window" HorizontalAlignment="Left" Margin="200,120,0,0" VerticalAlignment="Top" Width="125" Click="btnCreatePlaylistCancel_Click"/>
+        <ListBox x:Name="listBoxPlaylistSongs" HorizontalAlignment="Left" Height="190" Margin="20,150,0,0" VerticalAlignment="Top" Width="380" ItemsSource="{Binding}"/>
+    </Grid>
+</Window>

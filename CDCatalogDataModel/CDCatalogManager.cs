@@ -483,6 +483,29 @@ namespace CDCatalogDataModel
             }
         }
 
+        public static List<Song> GetSongsFromPlaylist(Playlist playlist)
+        {
+            List<Song> songList = new List<Song>();
+            List<PlaylistSong> pLSList = new List<PlaylistSong>();
+
+            using (CDCatalogEntities db = new CDCatalogEntities())
+            {
+                try
+                {
+                    pLSList = db.PlaylistSongs.Where(pls => pls.PlaylistID.Equals(playlist.PlaylistID)).ToList();
+                    foreach (PlaylistSong pls in pLSList)
+                    {
+                        songList.Add(db.Songs.Where(s => s.SongID.Equals(pls.SongID)).First());
+                    }
+                }
+                catch
+                {
+                    //TODO: Figure out what to do with an exception. 
+                }
+            }
+            return songList;
+        }
+
         public static bool DeletePlaylistSong(PlaylistSong playlistSongToDelete)
         {
             bool success = false;

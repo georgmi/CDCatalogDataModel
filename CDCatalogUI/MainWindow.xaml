@@ -16,17 +16,41 @@
         <Grid Name="gridAddItems">
             <!--Add items to the database-->
             <Label x:Name="lblAddNew" Content="Add New..." HorizontalAlignment="Left" Margin="180,25,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnAddNewSong" Content="Song" HorizontalAlignment="Left" Margin="250,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewSong" Content="Song" HorizontalAlignment="Left" Margin="250,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewSong_Click"/>
             <Button x:Name="btnAddNewAlbum" Content="Album" HorizontalAlignment="Left" Margin="310,25,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnAddNewArtist" Content="Artist" HorizontalAlignment="Left" Margin="370,25,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnAddNewGenre" Content="Genre" HorizontalAlignment="Left" Margin="430,25,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnAddNewPlaylist" Content="Playlist" HorizontalAlignment="Left" Margin="490,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewArtist" Content="Artist" HorizontalAlignment="Left" Margin="370,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewArtist_Click"/>
+            <Button x:Name="btnAddNewGenre" Content="Genre" HorizontalAlignment="Left" Margin="430,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewGenre_Click"/>
+            <Button x:Name="btnAddNewPlaylist" Content="Playlist" HorizontalAlignment="Left" Margin="490,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewPlaylist_Click"/>
         </Grid>
         
-        <Grid Name="gridSelection">
+        <Grid Name="gridAllSongsFilter">
             <!--Selection ListBox for when a filter is selected-->
-            <Label x:Name="lblFilter" Content="No filter selected" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
-            <ListBox x:Name="listBoxFilterList" HorizontalAlignment="Left" Height="30" Margin="35,180,0,0" VerticalAlignment="Top" Width="300"/>
+            <Label x:Name="lblAllSongsFilter" Content="No filter selected" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxAllSongs" HorizontalAlignment="Left" Height="25" Margin="35,180,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}"/>
+        </Grid>
+
+        <Grid Name="gridAlbumFilter" Visibility="Hidden">
+            <!--Selection ListBox for when a filter is selected-->
+            <Label x:Name="lblAlbumFilter" Content="Select an Album" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxAlbum" HorizontalAlignment="Left" Height="25" Margin="35,180,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxAlbum_SelectionChanged"/>
+        </Grid>
+
+        <Grid Name="gridArtistFilter" Visibility="Hidden">
+            <!--Selection ListBox for when a filter is selected-->
+            <Label x:Name="lblArtistFilter" Content="Select an Artist" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxArtist" HorizontalAlignment="Left" Height="25" Margin="35,180,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxArtist_SelectionChanged"/>
+        </Grid>
+
+        <Grid Name="gridGenreFilter" Visibility="Hidden">
+            <!--Selection ListBox for when a filter is selected-->
+            <Label x:Name="lblGenreFilter" Content="Select a Genre" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxGenre" HorizontalAlignment="Left" Height="25" Margin="35,180,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxGenre_SelectionChanged"/>
+        </Grid>
+
+        <Grid Name="gridPlaylistFilter" Visibility="Hidden">
+            <!--Selection ListBox for when a filter is selected-->
+            <Label x:Name="lblPlaylistFilter" Content="Select a Playlist" HorizontalAlignment="Left" Margin="20,155,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxPlaylist" HorizontalAlignment="Left" Height="25" Margin="35,180,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxPlaylist_SelectionChanged"/>
         </Grid>
 
         <Grid Name="gridAlbumActions" Visibility="Hidden">
@@ -68,13 +92,14 @@
             <Button x:Name="btnEditSong" Content="Edit" HorizontalAlignment="Left" Margin="175,225,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnRateSong" Content="Rate" HorizontalAlignment="Left" Margin="295,225,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddSongToPL" Content="Add to a Playlist" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="100"/>
             <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 
         <Grid Name="gridSongList">
             <!--Selection ListBox to display songs-->
             <!--<Label x:Name="lblSongList" Content="Songs:" HorizontalAlignment="Left" Margin="20,225,0,0" VerticalAlignment="Top"/>-->
-            <ListBox x:Name="listBoxSongList" HorizontalAlignment="Left" Height="400" Margin="35,250,0,0" VerticalAlignment="Top" Width="850"/>
+            <ListBox x:Name="listBoxSongList" HorizontalAlignment="Left" Height="400" Margin="35,250,0,0" VerticalAlignment="Top" Width="850" ItemsSource="{Binding}"/>
         </Grid>
         
     </Grid>

@@ -15,3 +15,13 @@ C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\Entity
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.exe
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CDCatalogUI.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\CDCatalogDataModel.dll
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\bin\Debug\CDCatalogDataModel.pdb
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddSong.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddSong.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CreatePlaylist.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\CreatePlaylist.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddGenre.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddGenre.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArtist.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArtist.g.cs
