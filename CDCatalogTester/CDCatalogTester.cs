@@ -508,7 +508,7 @@ namespace CDCatalogTester
             songList.Clear();
             songList = CDCatalogManager.GetSongs();
 
-            foreach(Song s in songList)
+            foreach (Song s in songList)
             {
                 if (s.SongTitle == editedTestSong.SongTitle)
                 {

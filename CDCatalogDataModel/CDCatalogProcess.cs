@@ -8,6 +8,22 @@ namespace CDCatalogDataModel
 {
     public class CDCatalogProcess
     {
+        public struct TrackInfo
+        {
+            public int tracknum;
+            public string title;
+            public Genre genre;
+            public string genreName;
+            public int genreID;
+            public int tracklength;
+            public int rating;
+
+            public override string ToString()
+            {
+                return ("Track# " + tracknum.ToString() + ": " + title + "; " + tracklength.ToString() + " sec.; rating=" + rating.ToString() + "; " + genreName);
+            }
+        }
+
         public static List<Song> displaySongList = new List<Song>();
         public static List<Song> filteredSongList = new List<Song>();
         public static List<Album> filterAlbumList = new List<Album>();
@@ -19,6 +35,8 @@ namespace CDCatalogDataModel
         public static List<Album> subWindowAlbumList = new List<Album>();
         public static List<Genre> subWindowGenreList = new List<Genre>();
         public static List<Song> subWindowPlaylistSongs = new List<Song>();
+
+        public static List<TrackInfo> addAlbumTrackList = new List<TrackInfo>();
 
         public static void GetAllAlbums()
         {
@@ -128,7 +146,7 @@ namespace CDCatalogDataModel
         public static int CreatePlaylistGo(string playListName, int minutes)
         {
             subWindowPlaylistSongs.Clear();
-            Song song = null;
+            Song songObject = new Song();
             int totalDuration = 0;
             if (minutes > 0)
             {
@@ -136,9 +154,9 @@ namespace CDCatalogDataModel
                 for (int i = 0; i < playlistSongList.Count; i++)
                 {
                     PlaylistSong pls = playlistSongList[i];
-                    song = CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First();
-                    subWindowPlaylistSongs.Add(song);
-                    totalDuration += song.TrackLength;
+                    songObject = CDCatalogManager.GetSongs().Where(s => s.SongID.Equals(pls.SongID)).First();
+                    subWindowPlaylistSongs.Add(songObject);
+                    totalDuration += songObject.TrackLength;
                 }
             }
             return totalDuration;
@@ -174,6 +192,106 @@ namespace CDCatalogDataModel
                 //TODO: Message to user? Or not, because the genre they tried to add is in the database, 
                 //which is what they wanted.
             }
+        }
+
+        public static bool AddAlbumVerifyTrack(string tracknum, string title, Genre genre, string tracklengthmin, string tracklengthsec, int rating, out string message)
+        {
+            bool isValid = true;
+            message = "";
+            int tracknumber = 0;
+            int trackminutes = 0;
+            int trackseconds = 0;
+            if((!int.TryParse(tracknum, out tracknumber)) || tracknumber < 0)
+            {
+                isValid = false;
+                message += "Track number must be a non-negative integer.\n";
+            }
+            if(null == title || title.Length == 0)
+            {
+                isValid = false;
+                message += "Song title cannot be empty.\n";
+            }
+            if(tracklengthmin != "")
+            {
+                if ((!int.TryParse(tracklengthmin, out trackminutes)) || trackminutes < 0)
+                {
+                    isValid = false;
+                    message += "Track minutes must be a non-negative integer or blank.\n"; 
+                }
+            }
+            else
+            {
+                trackminutes = 0;
+            }
+            if ((!int.TryParse(tracklengthsec, out trackseconds)) || trackseconds < 0)
+            {
+                isValid = false;
+                message += "Track seconds must be a non-negative integer.\n";
+            }
+
+            if(isValid)
+            {
+                int totaltracktime = ((trackminutes * 60) + trackseconds);
+                addAlbumAddTrack(tracknumber, title, genre, totaltracktime, rating);
+            }
+            return isValid;
+        }
+
+        public static void addAlbumAddTrack(int tracknum, string title, Genre genre, int tracklength, int rating)
+        {
+            TrackInfo newtrack = new TrackInfo();
+            newtrack.tracknum = tracknum;
+            newtrack.title = title;
+            newtrack.genre = genre;
+            newtrack.genreName = genre.GenreName;
+            newtrack.genreID = genre.GenreID;
+            newtrack.tracklength = tracklength;
+            newtrack.rating = rating;
+            addAlbumTrackList.Add(newtrack);
+        }
+
+        public static bool addAlbumGo(string albumTitle, Artist artist, int albumRating, string year, List<TrackInfo> tracks, out string message)
+        {
+            bool isValid = true;
+            message = "";
+            int yr = 0;
+            int doesAlbumExist = CDCatalogManager.GetAlbums().Where(a => a.AlbumTitle.Equals(albumTitle)).Where(a => a.ArtistID.Equals(artist.ArtistID)).Count();
+            if(!(doesAlbumExist == 0))
+            {
+                isValid = false;
+                message += "An album by this artist with this title already exists in the database.\n";
+            }
+            if(!int.TryParse(year, out yr))
+            {
+                isValid = false;
+                message += "Year must be an integer.\n";
+            }
+
+            if(isValid)
+            {
+                Song song = new Song();
+                Album album = new Album();
+                album.AlbumTitle = albumTitle;
+                album.ArtistID = artist.ArtistID;
+                album.Rating = albumRating;
+                album.Year = yr;
+                CDCatalogManager.AddAlbum(album);
+
+                foreach(TrackInfo t in tracks)
+                {
+                    song = new Song();
+                    song.AlbumID = album.AlbumID;
+                    song.ArtistID = artist.ArtistID;
+                    song.GenreID = t.genreID;
+                    song.Rating = t.rating;
+                    song.SongTitle = t.title;
+                    song.TrackLength = t.tracklength;
+                    song.TrackNumber = t.tracknum;
+                    CDCatalogManager.AddSong(song);
+                }
+            }
+
+            return isValid;
         }
 
         public static List<PlaylistSong> GeneratePlayList(string playListName, int minutes)
@@ -249,7 +367,7 @@ namespace CDCatalogDataModel
         public static List<Song> Combinations(List<Song> inputList, int durationSeconds)
         {
             int totalDuration = 0;
-            foreach(Song s in inputList)
+            foreach (Song s in inputList)
             {
                 totalDuration += s.TrackLength;
             }
@@ -305,7 +423,7 @@ namespace CDCatalogDataModel
                     //to pass up the stack, or if instead I need to keep going.
                     storageList = recursiveCombine(inputList, workingList, durationSeconds, count, (recursionLevel + 1), (i + 1));
                     totalDuration = 0;
-                    foreach(Song s in storageList)
+                    foreach (Song s in storageList)
                     {
                         if (null != s)
                         {

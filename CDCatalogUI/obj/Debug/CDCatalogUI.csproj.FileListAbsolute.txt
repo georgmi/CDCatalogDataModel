@@ -25,3 +25,5 @@ C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddGen
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddGenre.g.cs
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArtist.baml
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArtist.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddAlbum.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddAlbum.g.cs

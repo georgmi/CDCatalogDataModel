@@ -17,10 +17,16 @@
             <!--Add items to the database-->
             <Label x:Name="lblAddNew" Content="Add New..." HorizontalAlignment="Left" Margin="180,25,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnAddNewSong" Content="Song" HorizontalAlignment="Left" Margin="250,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewSong_Click"/>
-            <Button x:Name="btnAddNewAlbum" Content="Album" HorizontalAlignment="Left" Margin="310,25,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnAddNewAlbum" Content="Album" HorizontalAlignment="Left" Margin="310,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewAlbum_Click"/>
             <Button x:Name="btnAddNewArtist" Content="Artist" HorizontalAlignment="Left" Margin="370,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewArtist_Click"/>
             <Button x:Name="btnAddNewGenre" Content="Genre" HorizontalAlignment="Left" Margin="430,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewGenre_Click"/>
             <Button x:Name="btnAddNewPlaylist" Content="Playlist" HorizontalAlignment="Left" Margin="490,25,0,0" VerticalAlignment="Top" Width="50" Click="btnAddNewPlaylist_Click"/>
+        </Grid>
+        
+        <Grid Name="gridSearchOptions">
+            <Label x:Name="lblSearch" Content="Search by title:" HorizontalAlignment="Left" Margin="180,75,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txtSearchTitle" HorizontalAlignment="Left" Height="23" Margin="270,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300"/>
+            <Button x:Name="btnSearchTitle" Content="Search" HorizontalAlignment="Left" Margin="580,75,0,0" VerticalAlignment="Top" Width="75"/>
         </Grid>
         
         <Grid Name="gridAllSongsFilter">
@@ -92,7 +98,7 @@
             <Button x:Name="btnEditSong" Content="Edit" HorizontalAlignment="Left" Margin="175,225,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnRateSong" Content="Rate" HorizontalAlignment="Left" Margin="295,225,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnAddSongToPL" Content="Add to a Playlist" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="100"/>
+            <!--<Button x:Name="btnAddSongToPL" Content="Add to a Playlist" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="100"/>-->
             <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 

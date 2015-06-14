@@ -23,8 +23,14 @@
             <TextBox x:Name="txtAddSongTrackLengthSeconds" HorizontalAlignment="Left" Height="23" Margin="180,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="25"/>
             <Label Content="seconds" HorizontalAlignment="Left" Margin="205,150,0,0" VerticalAlignment="Top"/>
             <Label Content="Rating:" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtAddSongRating" HorizontalAlignment="Left" Height="23" Margin="100,185,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="25"/>
-            <Label Content="(1:Do Not Like; 2:OK; 3:Like; 4:Really Like; 5:Love; 0:Not Yet Rated)" HorizontalAlignment="Left" Margin="130,185,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxAddSongRating" HorizontalAlignment="Left" Margin="80,185,0,0" VerticalAlignment="Top" Width="200" SelectedIndex="0" IsEditable="False">
+                <ComboBoxItem Content="0 stars: Not Yet Rated" IsSelected="True"/>
+                <ComboBoxItem Content="1 star: Do Not Like"/>
+                <ComboBoxItem Content="2 stars: OK"/>
+                <ComboBoxItem Content="3 stars: Like"/>
+                <ComboBoxItem Content="4 stars: Really Like"/>
+                <ComboBoxItem Content="5 stars: Love"/>
+            </ComboBox>
         </Grid>
         <Grid Name="gridAddSongButtons">
             <Button x:Name="btnAddSongSave" Content="Save" HorizontalAlignment="Left" Margin="140,225,0,0" VerticalAlignment="Top" Width="70" Height="22" Click="btnAddSongSave_Click"/>

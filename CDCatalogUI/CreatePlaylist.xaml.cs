@@ -39,8 +39,11 @@ namespace CDCatalogUI
             if (length > 0 && txtCreatePlaylistName.Text.Length > 0)
             {
                 int duration = CDCatalogProcess.CreatePlaylistGo(txtCreatePlaylistName.Text, length);
+                int secondsperminute = 60;
                 listBoxPlaylistSongs.DataContext = CDCatalogProcess.subWindowPlaylistSongs;
-                lblCreatePlaylistActualLength.Content = ("Playlist will run for " + duration.ToString() + " seconds");
+                int durationminutes = (duration / secondsperminute);
+                int durationseconds = (duration % secondsperminute);
+                lblCreatePlaylistActualLength.Content = ("Playlist will run for " + durationminutes.ToString() + ":" + durationseconds.ToString());
             }
             else
             {

@@ -159,30 +159,55 @@ namespace CDCatalogUI
         {
             AddSong addSongWindow = new AddSong();
             addSongWindow.Show();
-            CDCatalogProcess.RefreshMainWindowLists();
+            RefreshUIElements();
         }
 
         private void btnAddNewPlaylist_Click(object sender, RoutedEventArgs e)
         {
             CreatePlaylist createPlaylistWindow = new CreatePlaylist();
-            createPlaylistWindow.Show();
-            CDCatalogProcess.RefreshMainWindowLists();
-            //rbViewOptionsPlaylist.IsChecked = true;
+            createPlaylistWindow.ShowDialog();
+            RefreshUIElements();
         }
 
         private void btnAddNewGenre_Click(object sender, RoutedEventArgs e)
         {
             AddGenre addGenreWindow = new AddGenre();
-            addGenreWindow.Show();
-            CDCatalogProcess.RefreshMainWindowLists();
+            addGenreWindow.ShowDialog();
+            RefreshUIElements();
         }
 
         private void btnAddNewArtist_Click(object sender, RoutedEventArgs e)
         {
             AddArtist addArtistWindow = new AddArtist();
-            addArtistWindow.Show();
-            CDCatalogProcess.RefreshMainWindowLists();
+            addArtistWindow.ShowDialog();
+            RefreshUIElements();
         }
 
+        private void btnAddNewAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            AddAlbum addAlbumWindow = new AddAlbum();
+            addAlbumWindow.Show();
+            RefreshUIElements();
+        }
+
+        private void RefreshUIElements()
+        {
+            comboBoxAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAlbum_SelectionChanged));
+            comboBoxArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxArtist_SelectionChanged));
+            comboBoxGenre.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxGenre_SelectionChanged));
+            comboBoxPlaylist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxPlaylist_SelectionChanged));
+            CDCatalogProcess.RefreshMainWindowLists();
+            comboBoxAlbum.DataContext = null;
+            comboBoxAlbum.DataContext = CDCatalogProcess.filterAlbumList;
+            comboBoxAllSongs.DataContext = null;
+            comboBoxAllSongs.DataContext = CDCatalogProcess.displaySongList;
+            comboBoxArtist.DataContext = null;
+            comboBoxArtist.DataContext = CDCatalogProcess.filterArtistList;
+            comboBoxGenre.DataContext = null;
+            comboBoxGenre.DataContext = CDCatalogProcess.filterGenreList;
+            comboBoxPlaylist.DataContext = null;
+            comboBoxPlaylist.DataContext = CDCatalogProcess.filterPlaylistList;
+            rbViewOptionsAll.IsChecked = true;
+        }
     }
 }

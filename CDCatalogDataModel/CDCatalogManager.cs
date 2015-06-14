@@ -17,6 +17,23 @@ namespace CDCatalogDataModel
 
     public class CDCatalogManager
     {
+        //public struct SongObject
+        //{
+        //    public Song song;
+        //    public Album album;
+
+        //    public SongObject(Song songIn, Album albumIn)
+        //    {
+        //        song = songIn;
+        //        album = albumIn;
+        //    }
+
+        //    public override string ToString()
+        //    {
+        //        return ("Song\t" + this.song.SongTitle + " by " + this.song.Artist.ArtistName + " on Album " + this.album.AlbumTitle); ;
+        //    }
+        //}
+
         public static List<Album> GetAlbums()
         {
             using (CDCatalogEntities db = new CDCatalogEntities())
@@ -25,6 +42,11 @@ namespace CDCatalogDataModel
                 try
                 {
                     albumList = db.Albums.OrderBy(a => a.AlbumTitle).ToList();
+                    foreach(Album alb in albumList)
+                    {
+                        alb.Artist = db.Artists.Where(art => art.ArtistID.Equals(alb.ArtistID)).First();
+                    }
+                   
                 }
                 catch (Exception e)
                 {
@@ -361,10 +383,23 @@ namespace CDCatalogDataModel
         {
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
+                
                 List<Song> songList = new List<Song>();
                 try
                 {
                     songList = db.Songs.OrderBy(s => s.SongTitle).ToList();
+                    foreach(Song song in songList)
+                    {
+                        song.Artist = db.Artists.Where(art => art.ArtistID.Equals(song.ArtistID)).First();
+                        song.Genre = db.Genres.Where(g => g.GenreID.Equals(song.GenreID)).First();
+                        //BUGBUG: The below code fails, I *think* because the Album class has an Artist object 
+                        //as a member. I get a SystemNotSupported Exception when the statement runs.
+                        //song.Album = db.Albums.Where(alb => alb.AlbumID.Equals(song.AlbumID)).First();
+                        ////songObject = new SongObject();
+                        ////songObject.song = song;
+                        ////songObject.album = db.Albums.Where(alb => alb.AlbumID.Equals(song.AlbumID)).First();
+                        ////songObjectList.Add(songObject);
+                    }
                 }
                 catch (Exception e)
                 {
@@ -487,7 +522,7 @@ namespace CDCatalogDataModel
         {
             List<Song> songList = new List<Song>();
             List<PlaylistSong> pLSList = new List<PlaylistSong>();
-
+            List<Song> songObjectList = new List<Song>();
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
                 try
@@ -503,7 +538,7 @@ namespace CDCatalogDataModel
                     //TODO: Figure out what to do with an exception. 
                 }
             }
-            return songList;
+            return songObjectList;
         }
 
         public static bool DeletePlaylistSong(PlaylistSong playlistSongToDelete)
@@ -554,7 +589,8 @@ namespace CDCatalogDataModel
     {
         public override string ToString()
         {
-            return this.AlbumTitle;
+            //return this.AlbumTitle;
+            return ("Album\t" + this.AlbumTitle + " by " + this.Artist.ArtistName);
         }
     }
 
@@ -586,7 +622,8 @@ namespace CDCatalogDataModel
     {
         public override string ToString()
         {
-            return this.SongTitle;
+            //return this.SongTitle;
+            return ("Song\t" + this.SongTitle + " by " + this.Artist.ArtistName);
         }
     }
 
