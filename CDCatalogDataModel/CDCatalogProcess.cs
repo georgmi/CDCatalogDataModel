@@ -25,6 +25,7 @@ namespace CDCatalogDataModel
         }
 
         public static List<Song> displaySongList = new List<Song>();
+        public static List<object> songsAndAlbums = new List<object>();
         public static List<Song> filteredSongList = new List<Song>();
         public static List<Album> filterAlbumList = new List<Album>();
         public static List<Artist> filterArtistList = new List<Artist>();
@@ -61,6 +62,21 @@ namespace CDCatalogDataModel
         public static void GetAllSongs()
         {
             displaySongList = CDCatalogManager.GetSongs();
+        }
+
+        public static void GetSongsandAlbums()
+        {
+            songsAndAlbums.Clear();
+            GetAllAlbums();
+            GetAllSongs();
+            foreach (Album a in filterAlbumList)
+            {
+                songsAndAlbums.Add(a);
+            }
+            foreach (Song s in displaySongList)
+            {
+                songsAndAlbums.Add(s);
+            }
         }
 
         public static void FilterSongsByAlbum(Album album)
@@ -292,6 +308,84 @@ namespace CDCatalogDataModel
             }
 
             return isValid;
+        }
+
+        public static bool AddSongGo(string title, Artist artist, Album album, string trackIn, Genre genre, 
+                    string minutes, string seconds, int rating, out string message)
+        {
+            bool isValid = true;
+            message = "";
+            int tracknum = 0;
+            int trackminutes = 0;
+            int trackseconds = 0;
+            if(title == "")
+            {
+                isValid = false;
+                message += "Song Title cannot be blank.\n";
+            }
+            if (null == artist)
+            {
+                isValid = false;
+                message += "Please select an Artist.\n";
+            }
+            if (null == album)
+            {
+                isValid = false;
+                message += "Please select an Album.\n";
+            }
+            if(!int.TryParse(trackIn, out tracknum) || tracknum < 0)
+            {
+                isValid = false;
+                message += "Track # must be a nonnegative integer.\n";
+
+            }
+            if (null == genre)
+            {
+                isValid = false;
+                message += "Please select a Genre.\n";
+            }
+            if (minutes != "")
+            {
+                if (!int.TryParse(minutes, out trackminutes) || trackminutes < 0)
+                {
+                    isValid = false;
+                    message += "Track minutes must be a nonnegative integer or blank.\n";
+
+                }
+            }
+            if (!int.TryParse(seconds, out trackseconds) || trackseconds < 1)
+            {
+                isValid = false;
+                message += "Track seconds must be a positive integer.\n";
+            }
+
+            if(isValid)
+            {
+                Song song = new Song();
+                song.SongTitle = title;
+                song.ArtistID = artist.ArtistID;
+                song.AlbumID = album.AlbumID;
+                song.TrackNumber = tracknum;
+                song.GenreID = genre.GenreID;
+                song.TrackLength = ((trackminutes * 60) + trackseconds);
+                song.Rating = rating;
+                CDCatalogManager.AddSong(song);
+            }
+
+
+            return isValid;
+        }
+
+        public static void RateSongGo(Song song, int rating)
+        {
+            song.Rating = rating;
+            CDCatalogManager.UpdateSong(song);
+        }
+
+        public static void RateAlbumGo(Album album, int rating)
+        {
+            album.Rating = rating;
+            CDCatalogManager.UpdateAlbum(album);
         }
 
         public static List<PlaylistSong> GeneratePlayList(string playListName, int minutes)

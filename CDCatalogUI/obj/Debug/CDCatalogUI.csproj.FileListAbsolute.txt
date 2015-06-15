@@ -27,3 +27,7 @@ C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArt
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddArtist.g.cs
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddAlbum.baml
 C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\AddAlbum.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\RateSong.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\RateSong.g.cs
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\RateAlbum.baml
+C:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogUI\obj\Debug\RateAlbum.g.cs

@@ -157,7 +157,7 @@ namespace CDCatalogUI
 
         private void btnAddNewSong_Click(object sender, RoutedEventArgs e)
         {
-            AddSong addSongWindow = new AddSong();
+            AddSong addSongWindow = new AddSong(this);
             addSongWindow.Show();
             RefreshUIElements();
         }
@@ -185,12 +185,12 @@ namespace CDCatalogUI
 
         private void btnAddNewAlbum_Click(object sender, RoutedEventArgs e)
         {
-            AddAlbum addAlbumWindow = new AddAlbum();
+            AddAlbum addAlbumWindow = new AddAlbum(this);
             addAlbumWindow.Show();
             RefreshUIElements();
         }
 
-        private void RefreshUIElements()
+        public void RefreshUIElements()
         {
             comboBoxAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAlbum_SelectionChanged));
             comboBoxArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxArtist_SelectionChanged));
@@ -207,7 +207,32 @@ namespace CDCatalogUI
             comboBoxGenre.DataContext = CDCatalogProcess.filterGenreList;
             comboBoxPlaylist.DataContext = null;
             comboBoxPlaylist.DataContext = CDCatalogProcess.filterPlaylistList;
+            listBoxSongList.DataContext = null;
+            listBoxSongList.DataContext = CDCatalogProcess.displaySongList;
             rbViewOptionsAll.IsChecked = true;
+        }
+
+        private void btnSearchTitle_Click(object sender, RoutedEventArgs e)
+        {
+            CDCatalogProcess.GetSongsandAlbums();
+            listBoxSongList.DataContext = null;
+            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
+        }
+
+        private void btnRateSong_Click(object sender, RoutedEventArgs e)
+        {
+            if(listBoxSongList.SelectedItem is Song)
+            {
+                RateSong rateSongWindow = new RateSong((Song)listBoxSongList.SelectedItem);
+                rateSongWindow.ShowDialog();
+                RefreshUIElements();
+            }
+            if(listBoxSongList.SelectedItem is Album)
+            {
+                RateAlbum rateAlbumWindow = new RateAlbum((Album)listBoxSongList.SelectedItem);
+                rateAlbumWindow.ShowDialog();
+                RefreshUIElements();
+            }
         }
     }
 }

@@ -17,23 +17,6 @@ namespace CDCatalogDataModel
 
     public class CDCatalogManager
     {
-        //public struct SongObject
-        //{
-        //    public Song song;
-        //    public Album album;
-
-        //    public SongObject(Song songIn, Album albumIn)
-        //    {
-        //        song = songIn;
-        //        album = albumIn;
-        //    }
-
-        //    public override string ToString()
-        //    {
-        //        return ("Song\t" + this.song.SongTitle + " by " + this.song.Artist.ArtistName + " on Album " + this.album.AlbumTitle); ;
-        //    }
-        //}
-
         public static List<Album> GetAlbums()
         {
             using (CDCatalogEntities db = new CDCatalogEntities())
@@ -41,7 +24,7 @@ namespace CDCatalogDataModel
                 List<Album> albumList = new List<Album>();
                 try
                 {
-                    albumList = db.Albums.OrderBy(a => a.AlbumTitle).ToList();
+                    albumList = db.Albums.OrderByDescending(a => a.Rating).ToList();
                     foreach(Album alb in albumList)
                     {
                         alb.Artist = db.Artists.Where(art => art.ArtistID.Equals(alb.ArtistID)).First();
@@ -111,8 +94,8 @@ namespace CDCatalogDataModel
                     alb.AlbumTitle = editedAlbum.AlbumTitle;
                     alb.Rating = editedAlbum.Rating;
                     alb.Year = editedAlbum.Year;
-                    alb.Artist = editedAlbum.Artist;
-                    alb.Songs = editedAlbum.Songs;
+                    alb.ArtistID = editedAlbum.ArtistID;
+                    //alb.Songs = editedAlbum.Songs; //Don't think I need this.
                     db.SaveChanges();
                     success = true;
                 }
@@ -197,8 +180,8 @@ namespace CDCatalogDataModel
                     Artist art = db.Artists.Where(a => a.ArtistID.Equals(editedArtist.ArtistID)).First();
 
                     art.ArtistName = editedArtist.ArtistName;
-                    art.Albums = editedArtist.Albums;
-                    art.Songs = editedArtist.Songs;
+                    //art.Albums = editedArtist.Albums; //This seems unnecessary
+                    //art.Songs = editedArtist.Songs; //This, too.
                     db.SaveChanges();
                     success = true;
                 }
@@ -282,7 +265,7 @@ namespace CDCatalogDataModel
                 {
                     Genre gen = db.Genres.Where(g => g.GenreID.Equals(editedGenre.GenreID)).First();
                     gen.GenreName = editedGenre.GenreName;
-                    gen.Songs = editedGenre.Songs;
+                    //gen.Songs = editedGenre.Songs; //This seems unnecessary?
                     db.SaveChanges();
                     success = true;
                 }
@@ -365,7 +348,8 @@ namespace CDCatalogDataModel
                 {
                     Playlist play = db.Playlists.Where(p => p.PlaylistID.Equals(editedPlaylist.PlaylistID)).First();
                     play.PlaylistName = editedPlaylist.PlaylistName;
-                    play.PlaylistSongs = editedPlaylist.PlaylistSongs;
+                    //TODO: Need to think about this process some more.
+                    //play.PlaylistSongs = editedPlaylist.PlaylistSongs;
                     db.SaveChanges();
                     success = true;
                 }
@@ -387,18 +371,12 @@ namespace CDCatalogDataModel
                 List<Song> songList = new List<Song>();
                 try
                 {
-                    songList = db.Songs.OrderBy(s => s.SongTitle).ToList();
+                    songList = db.Songs.OrderByDescending(s => s.Rating).ToList();
                     foreach(Song song in songList)
                     {
                         song.Artist = db.Artists.Where(art => art.ArtistID.Equals(song.ArtistID)).First();
                         song.Genre = db.Genres.Where(g => g.GenreID.Equals(song.GenreID)).First();
-                        //BUGBUG: The below code fails, I *think* because the Album class has an Artist object 
-                        //as a member. I get a SystemNotSupported Exception when the statement runs.
-                        //song.Album = db.Albums.Where(alb => alb.AlbumID.Equals(song.AlbumID)).First();
-                        ////songObject = new SongObject();
-                        ////songObject.song = song;
-                        ////songObject.album = db.Albums.Where(alb => alb.AlbumID.Equals(song.AlbumID)).First();
-                        ////songObjectList.Add(songObject);
+                        song.Album = db.Albums.Where(alb => (alb.AlbumID == song.AlbumID)).First();
                     }
                 }
                 catch (Exception e)
@@ -462,9 +440,9 @@ namespace CDCatalogDataModel
                 {
                     Song son = db.Songs.Where(s => s.SongID.Equals(editedSong.SongID)).First();
                     son.SongTitle = editedSong.SongTitle;
-                    son.Album = editedSong.Album;
-                    son.Artist = editedSong.Artist;
-                    son.Genre = editedSong.Genre;
+                    son.AlbumID = editedSong.AlbumID;
+                    son.ArtistID = editedSong.ArtistID;
+                    son.GenreID = editedSong.GenreID;
                     son.PlaylistSongs = editedSong.PlaylistSongs;
                     son.Rating = editedSong.Rating;
                     son.TrackLength = editedSong.TrackLength;
@@ -590,7 +568,7 @@ namespace CDCatalogDataModel
         public override string ToString()
         {
             //return this.AlbumTitle;
-            return ("Album\t" + this.AlbumTitle + " by " + this.Artist.ArtistName);
+            return ("Album\t" + this.AlbumTitle + " by " + this.Artist.ArtistName + ", rating " + this.Rating.ToString());
         }
     }
 
@@ -623,7 +601,7 @@ namespace CDCatalogDataModel
         public override string ToString()
         {
             //return this.SongTitle;
-            return ("Song\t" + this.SongTitle + " by " + this.Artist.ArtistName);
+            return ("Song\t\"" + this.SongTitle + "\" by " + this.Artist.ArtistName + " in album _" + this.Album.AlbumTitle + "_, rating " + this.Rating.ToString());
         }
     }
 

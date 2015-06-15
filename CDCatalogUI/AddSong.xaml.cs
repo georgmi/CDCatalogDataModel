@@ -20,9 +20,11 @@ namespace CDCatalogUI
     /// </summary>
     public partial class AddSong : Window
     {
-        public AddSong()
+        MainWindow invoker;
+        public AddSong(MainWindow caller)
         {
             InitializeComponent();
+            invoker = caller;
             SetUpUI();
         }
 
@@ -50,7 +52,24 @@ namespace CDCatalogUI
 
         private void btnAddSongSave_Click(object sender, RoutedEventArgs e)
         {
-
+            string message;
+            if (CDCatalogProcess.AddSongGo(txtAddSongTitle.Text, 
+                    (Artist)comboBoxAddSongArtist.SelectedItem, 
+                    (Album)comboBoxAddSongAlbum.SelectedItem, 
+                    txtAddSongTrack.Text, 
+                    (Genre)comboBoxAddSongGenre.SelectedItem,
+                    txtAddSongTrackLengthMinutes.Text,
+                    txtAddSongTrackLengthSeconds.Text,
+                    comboBoxAddSongRating.SelectedIndex,
+                    out message))
+            {
+                invoker.RefreshUIElements();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
         }
 
         private void comboBoxAddSongArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)

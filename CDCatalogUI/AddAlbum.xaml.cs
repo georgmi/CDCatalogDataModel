@@ -20,7 +20,8 @@ namespace CDCatalogUI
     /// </summary>
     public partial class AddAlbum : Window
     {
-        public AddAlbum()
+        MainWindow invoker;
+        public AddAlbum(MainWindow caller)
         {
             InitializeComponent();
             CDCatalogProcess.AddSongsFillArtists();
@@ -30,6 +31,7 @@ namespace CDCatalogUI
             comboBoxAddAlbumGenreIn.DataContext = CDCatalogProcess.subWindowGenreList;
             comboBoxAddAlbumGenreIn.SelectedIndex = 0;
             CDCatalogProcess.addAlbumTrackList.Clear();
+            invoker = caller;
         }
 
         private void btnAddAlbumCancel_Click(object sender, RoutedEventArgs e)
@@ -93,6 +95,7 @@ namespace CDCatalogUI
                     txtAddAlbumYear.Text,
                     CDCatalogProcess.addAlbumTrackList, out message))
             {
+                invoker.RefreshUIElements();
                 this.Close();
             }
             else
