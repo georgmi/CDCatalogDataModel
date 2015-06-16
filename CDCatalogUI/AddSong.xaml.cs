@@ -74,13 +74,13 @@ namespace CDCatalogUI
 
         private void comboBoxAddSongArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
-            comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
-            Artist selectedArtist = (Artist)comboBoxAddSongArtist.SelectedItem;
-            CDCatalogProcess.FilterAlbumsByArtist(selectedArtist);
-            comboBoxAddSongAlbum.DataContext = CDCatalogProcess.subWindowAlbumList;
-            comboBoxAddSongArtist.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
-            comboBoxAddSongAlbum.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
+            //comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
+            //comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
+            //Artist selectedArtist = (Artist)comboBoxAddSongArtist.SelectedItem;
+            //CDCatalogProcess.FilterAlbumsByArtist(selectedArtist);
+            //comboBoxAddSongAlbum.DataContext = CDCatalogProcess.subWindowAlbumList;
+            //comboBoxAddSongArtist.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
+            //comboBoxAddSongAlbum.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
         }
 
         private void btnAddSongClear_Click(object sender, RoutedEventArgs e)
@@ -90,31 +90,50 @@ namespace CDCatalogUI
 
         private void comboBoxAddSongAlbum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Album selectedAlbum = (Album)comboBoxAddSongAlbum.SelectedItem;
-            comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
-            comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
-            int albumID = selectedAlbum.AlbumID;
-            //CDCatalogProcess.FilterArtistsByAlbum(selectedAlbum);
-            comboBoxAddSongArtist.DataContext = CDCatalogProcess.subWindowArtistList;
-            comboBoxAddSongArtist.SelectedIndex = 0;
-            for (int j = 0; j < CDCatalogProcess.subWindowArtistList.Count; j++ )
-            {
-                if(CDCatalogProcess.subWindowArtistList[j].ArtistID == selectedAlbum.ArtistID)
-                {
-                    comboBoxAddSongArtist.SelectedIndex = j;
-                }
-            }
-            comboBoxAddSongAlbum.DataContext = CDCatalogProcess.subWindowAlbumList;
-            comboBoxAddSongAlbum.SelectedIndex = 0;
-            for (int i = 0; i < CDCatalogProcess.subWindowAlbumList.Count; i++ )
-            {
-                if (CDCatalogProcess.subWindowAlbumList[i].AlbumID == selectedAlbum.AlbumID)
-                {
-                    comboBoxAddSongAlbum.SelectedIndex = i;
-                }
-            }
-            comboBoxAddSongArtist.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
-            comboBoxAddSongAlbum.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
+            //Album selectedAlbum = (Album)comboBoxAddSongAlbum.SelectedItem;
+            //comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
+            //comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
+            //int albumID = selectedAlbum.AlbumID;
+            ////CDCatalogProcess.FilterArtistsByAlbum(selectedAlbum);
+            //comboBoxAddSongArtist.DataContext = CDCatalogProcess.subWindowArtistList;
+            //comboBoxAddSongArtist.SelectedIndex = 0;
+            //for (int j = 0; j < CDCatalogProcess.subWindowArtistList.Count; j++ )
+            //{
+            //    if(CDCatalogProcess.subWindowArtistList[j].ArtistID == selectedAlbum.ArtistID)
+            //    {
+            //        comboBoxAddSongArtist.SelectedIndex = j;
+            //    }
+            //}
+            //comboBoxAddSongAlbum.DataContext = CDCatalogProcess.subWindowAlbumList;
+            //comboBoxAddSongAlbum.SelectedIndex = 0;
+            //for (int i = 0; i < CDCatalogProcess.subWindowAlbumList.Count; i++ )
+            //{
+            //    if (CDCatalogProcess.subWindowAlbumList[i].AlbumID == selectedAlbum.AlbumID)
+            //    {
+            //        comboBoxAddSongAlbum.SelectedIndex = i;
+            //    }
+            //}
+            //comboBoxAddSongArtist.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
+            //comboBoxAddSongAlbum.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
+        }
+
+        private void btnAddSongAddArtist_Click(object sender, RoutedEventArgs e)
+        {
+            AddArtist addArtistWindow = new AddArtist();
+            addArtistWindow.ShowDialog();
+            SetUpUI();
+        }
+
+        private void btnAddSongAddAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            //This method intentionally left blank; I decided the workflow of adding an album from the add a song window didn't make sense.
+        }
+
+        private void btnAddSongAddGenre_Click(object sender, RoutedEventArgs e)
+        {
+            AddGenre addGenreWindow = new AddGenre();
+            addGenreWindow.ShowDialog();
+            SetUpUI();
         }
     }
 }

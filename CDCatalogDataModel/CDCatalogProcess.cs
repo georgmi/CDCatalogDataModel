@@ -79,6 +79,27 @@ namespace CDCatalogDataModel
             }
         }
 
+        public static void GetSongsandAlbumsByTitle(string snippet)
+        {
+            songsAndAlbums.Clear();
+            GetAllAlbums();
+            GetAllSongs();
+            foreach (Album a in filterAlbumList)
+            {
+                if (a.AlbumTitle.ToUpper().Contains(snippet.ToUpper()))
+                {
+                    songsAndAlbums.Add(a);
+                }
+            }
+            foreach (Song s in displaySongList)
+            {
+                if (s.SongTitle.ToUpper().Contains(snippet.ToUpper()))
+                {
+                    songsAndAlbums.Add(s);
+                }
+            }
+        }
+
         public static void FilterSongsByAlbum(Album album)
         {
             filteredSongList.Clear();
@@ -88,13 +109,70 @@ namespace CDCatalogDataModel
         public static void FilterSongsByArtist(Artist artist)
         {
             filteredSongList.Clear();
-            filteredSongList = displaySongList.Where(s => s.ArtistID == artist.ArtistID).ToList();
+            //filteredSongList = displaySongList.Where(s => s.ArtistID == artist.ArtistID).ToList();
+            List<Album> workingAlbums = new List<Album>();
+            List<Album> sortedAlbums = new List<Album>();
+            List<Song> workingSongs = new List<Song>();
+            List<Song> sortedSongs = new List<Song>();
+            songsAndAlbums.Clear();
+            GetAllSongs();
+            foreach (Song s in displaySongList)
+            {
+                if (s.ArtistID == artist.ArtistID)
+                {
+                    workingSongs.Add(s);
+                    if (workingAlbums.Where(a => a.AlbumID == s.AlbumID).Count() == 0)
+                    {
+                        workingAlbums.Add(s.Album);
+                    }
+                }
+            }
+            sortedAlbums = workingAlbums.OrderByDescending(a => a.Rating).ToList();
+            sortedSongs = workingSongs.OrderByDescending(s => s.Rating).ToList();
+
+            foreach (Album a in sortedAlbums)
+            {
+                songsAndAlbums.Add(a);
+            }
+            foreach (Song s in sortedSongs)
+            {
+                songsAndAlbums.Add(s);
+            }
         }
 
         public static void FilterSongsByGenre(Genre genre)
         {
             filteredSongList.Clear();
-            filteredSongList = displaySongList.Where(s => s.GenreID == genre.GenreID).ToList();
+            //filteredSongList = displaySongList.Where(s => s.GenreID == genre.GenreID).ToList();
+            List<Album> workingAlbums = new List<Album>();
+            List<Album> sortedAlbums = new List<Album>();
+            List<Song> workingSongs = new List<Song>();
+            List<Song> sortedSongs = new List<Song>();
+
+            songsAndAlbums.Clear();
+            GetAllSongs();
+            foreach(Song s in displaySongList)
+            {
+                if(s.GenreID == genre.GenreID)
+                {
+                    workingSongs.Add(s);
+                    if(workingAlbums.Where(a => a.AlbumID == s.AlbumID).Count() == 0)
+                    {
+                        workingAlbums.Add(s.Album);
+                    }
+                }
+            }
+            sortedAlbums = workingAlbums.OrderByDescending(a => a.Rating).ToList();
+            sortedSongs = workingSongs.OrderByDescending(s => s.Rating).ToList();
+
+            foreach(Album a in sortedAlbums)
+            {
+                songsAndAlbums.Add(a);
+            }
+            foreach(Song s in sortedSongs)
+            {
+                songsAndAlbums.Add(s);
+            }
         }
 
         public static void FilterSongsByPlaylist(Playlist playlist)

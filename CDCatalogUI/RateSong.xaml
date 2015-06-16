@@ -7,10 +7,11 @@
         <Label x:Name="lblRateSongArtist" Content="By artist: " HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblRateSongAlbum" Content="On album: " HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
         <Label Content="Rating: " HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBoxRateSongRating" HorizontalAlignment="Left" Margin="60,80,0,0" VerticalAlignment="Top" Width="120">
+        <ComboBox x:Name="comboBoxRateSongRating" HorizontalAlignment="Left" Margin="60,80,0,0" VerticalAlignment="Top" Width="140">
+            <ComboBoxItem Content="0 stars: Not Yet Rated" IsSelected="True"/>
             <ComboBoxItem Content="1 star: Do Not Like"/>
             <ComboBoxItem Content="2 stars: OK"/>
-            <ComboBoxItem Content="3 stars: Like" IsSelected="true"/>
+            <ComboBoxItem Content="3 stars: Like"/>
             <ComboBoxItem Content="4 stars: Really Like"/>
             <ComboBoxItem Content="5 stars: Love"/>
         </ComboBox>

@@ -6,7 +6,7 @@
         <Grid Name="gridViewOptions">
             <!--View collection by album, artist, or genre-->
             <Label x:Name="lblViewOptions" Content="View collection by:" HorizontalAlignment="Left" Margin="20,25,0,0" VerticalAlignment="Top"/>
-            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsAll" Content="All Songs" HorizontalAlignment="Left" Margin="35,50,0,0" VerticalAlignment="Top" Checked="rbViewOptionsAll_Checked"/>
+            <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsAll" Content="All Songs and Albums" HorizontalAlignment="Left" Margin="35,50,0,0" VerticalAlignment="Top" Checked="rbViewOptionsAll_Checked"/>
             <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsCD" Content="Album" HorizontalAlignment="Left" Margin="35,70,0,0" VerticalAlignment="Top" Checked="rbViewOptionsCD_Checked"/>
             <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsArtist" Content="Artist" HorizontalAlignment="Left" Margin="35,90,0,0" VerticalAlignment="Top" Checked="rbViewOptionsArtist_Checked"/>
             <RadioButton GroupName="ViewOptions" x:Name="rbViewOptionsGenre" Content="Genre" HorizontalAlignment="Left" Margin="35,110,0,0" VerticalAlignment="Top" Checked="rbViewOptionsGenre_Checked"/>
@@ -64,8 +64,7 @@
             <Label x:Name="lblAlbumActions" Content="Do this to selected album:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnEditAlbum" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeleteAlbum" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnRateAlbum" Content="Rate" HorizontalAlignment="Left" Margin="485,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
+            <Button x:Name="btnRateAlbum" Content="Rate" HorizontalAlignment="Left" Margin="485,185,0,0" VerticalAlignment="Top" Width="50" Click="btnRateAlbum_Click"/>
         </Grid>
         
         <Grid Name="gridArtistActions" Visibility="Hidden">
@@ -73,7 +72,6 @@
             <Label x:Name="lblArtistActions" Content="Do this to selected artist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnEditArtist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeleteArtist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 
         <Grid Name="gridGenreActions" Visibility="Hidden">
@@ -81,7 +79,6 @@
             <Label x:Name="lblGenreActions" Content="Do this to selected genre:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnEditGenre" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeleteGenre" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 
         <Grid Name="gridPlaylistActions" Visibility="Hidden">
@@ -89,7 +86,6 @@
             <Label x:Name="lblPlaylistActions" Content="Do this to selected playlist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btnEditPlaylist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnDeletePlaylist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="545,185,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 
         <Grid Name="gridSongActions">
@@ -99,12 +95,10 @@
             <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50"/>
             <Button x:Name="btnRateSong" Content="Rate" HorizontalAlignment="Left" Margin="295,225,0,0" VerticalAlignment="Top" Width="50" Click="btnRateSong_Click"/>
             <!--<Button x:Name="btnAddSongToPL" Content="Add to a Playlist" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="100"/>-->
-            <!--<Button x:Name="btnAddNewGenres" Content="Genre" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="50"/>-->
         </Grid>
 
         <Grid Name="gridSongList">
             <!--Selection ListBox to display songs-->
-            <!--<Label x:Name="lblSongList" Content="Songs:" HorizontalAlignment="Left" Margin="20,225,0,0" VerticalAlignment="Top"/>-->
             <ListBox x:Name="listBoxSongList" HorizontalAlignment="Left" Height="400" Margin="35,250,0,0" VerticalAlignment="Top" Width="850" ItemsSource="{Binding}"/>
         </Grid>
         

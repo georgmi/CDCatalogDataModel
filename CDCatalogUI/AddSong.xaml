@@ -8,15 +8,16 @@
             <TextBox x:Name="txtAddSongTitle" HorizontalAlignment="Left" Height="23" Margin="75,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
             <Label Content="Artist:" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="comboBoxAddSongArtist" HorizontalAlignment="Left" Height="25" Margin="75,45,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxAddSongArtist_SelectionChanged"/>
-            <Button x:Name="btnAddSongAddArtist" Content="Add New Artist" HorizontalAlignment="Left" Margin="390,45,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="btnAddSongAddArtist" Content="Add New Artist" HorizontalAlignment="Left" Margin="390,45,0,0" VerticalAlignment="Top" Width="100" Click="btnAddSongAddArtist_Click"/>
             <Label Content="Album:" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="comboBoxAddSongAlbum" HorizontalAlignment="Left" Height="25" Margin="75,80,0,0" VerticalAlignment="Top" Width="300" ItemsSource="{Binding}" SelectionChanged="comboBoxAddSongAlbum_SelectionChanged"/>
-            <Button x:Name="btnAddSongAddAlbum" Content="Add New Album" HorizontalAlignment="Left" Margin="390,80,0,0" VerticalAlignment="Top" Width="100"/>
+            <!--Doesn't really make sense to Add Album from Adding a Song, since Adding an Album includes adding songs. Also, AddSong takes a MainWindow invoker as a parameter.-->
+            <!--<Button x:Name="btnAddSongAddAlbum" Content="Add New Album" HorizontalAlignment="Left" Margin="390,80,0,0" VerticalAlignment="Top" Width="100" Click="btnAddSongAddAlbum_Click"/>-->
             <Label Content="Track #:" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtAddSongTrack" HorizontalAlignment="Left" Height="23" Margin="75,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="50"/>
             <Label Content="Genre:" HorizontalAlignment="Left" Margin="150,115,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="comboBoxAddSongGenre" HorizontalAlignment="Left" Height="25" Margin="200,115,0,0" VerticalAlignment="Top" Width="175" ItemsSource="{Binding}"/>
-            <Button x:Name="btnAddSongAddGenre" Content="Add New Genre" HorizontalAlignment="Left" Margin="390,115,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button x:Name="btnAddSongAddGenre" Content="Add New Genre" HorizontalAlignment="Left" Margin="390,115,0,0" VerticalAlignment="Top" Width="100" Click="btnAddSongAddGenre_Click"/>
             <Label Content="Track Length:" HorizontalAlignment="Left" Margin="10,150,0,0" VerticalAlignment="Top"/>
             <TextBox x:Name="txtAddSongTrackLengthMinutes" HorizontalAlignment="Left" Height="23" Margin="100,150,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="25"/>
             <Label Content="minutes," HorizontalAlignment="Left" Margin="125,150,0,0" VerticalAlignment="Top"/>

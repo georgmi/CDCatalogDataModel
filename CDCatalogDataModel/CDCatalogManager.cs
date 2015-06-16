@@ -377,6 +377,7 @@ namespace CDCatalogDataModel
                         song.Artist = db.Artists.Where(art => art.ArtistID.Equals(song.ArtistID)).First();
                         song.Genre = db.Genres.Where(g => g.GenreID.Equals(song.GenreID)).First();
                         song.Album = db.Albums.Where(alb => (alb.AlbumID == song.AlbumID)).First();
+                        song.Album.Artist = db.Artists.Where(art => (art.ArtistID == song.Album.ArtistID)).First();
                     }
                 }
                 catch (Exception e)
@@ -498,9 +499,9 @@ namespace CDCatalogDataModel
 
         public static List<Song> GetSongsFromPlaylist(Playlist playlist)
         {
+            List<Song> workingList = GetSongs();
             List<Song> songList = new List<Song>();
             List<PlaylistSong> pLSList = new List<PlaylistSong>();
-            List<Song> songObjectList = new List<Song>();
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
                 try
@@ -508,7 +509,7 @@ namespace CDCatalogDataModel
                     pLSList = db.PlaylistSongs.Where(pls => pls.PlaylistID.Equals(playlist.PlaylistID)).ToList();
                     foreach (PlaylistSong pls in pLSList)
                     {
-                        songList.Add(db.Songs.Where(s => s.SongID.Equals(pls.SongID)).First());
+                        songList.Add(workingList.Where(s => s.SongID.Equals(pls.SongID)).First());
                     }
                 }
                 catch
@@ -516,7 +517,7 @@ namespace CDCatalogDataModel
                     //TODO: Figure out what to do with an exception. 
                 }
             }
-            return songObjectList;
+            return songList;
         }
 
         public static bool DeletePlaylistSong(PlaylistSong playlistSongToDelete)

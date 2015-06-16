@@ -41,8 +41,8 @@ namespace CDCatalogUI
             //listBoxFilterList Content = clear
             comboBoxAllSongs.DataContext = null;
             //Song List = All Songs
-            CDCatalogProcess.GetAllSongs();
-            listBoxSongList.DataContext = CDCatalogProcess.displaySongList;
+            CDCatalogProcess.GetSongsandAlbums();
+            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
         }
 
         private void rbViewOptionsCD_Checked(object sender, RoutedEventArgs e)
@@ -105,6 +105,7 @@ namespace CDCatalogUI
             //lblListBox Content = "Playlists"
             CDCatalogProcess.GetAllPlaylists();
             //listBoxFilterList Content = Playlist List
+
             comboBoxPlaylist.DataContext = CDCatalogProcess.filterPlaylistList;
             comboBoxPlaylist.AddHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxPlaylist_SelectionChanged));
             comboBoxPlaylist.SelectedIndex = 0;
@@ -134,24 +135,28 @@ namespace CDCatalogUI
         private void comboBoxAlbum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CDCatalogProcess.FilterSongsByAlbum((Album)comboBoxAlbum.SelectedItem);
+            listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
         }
 
         private void comboBoxArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CDCatalogProcess.FilterSongsByArtist((Artist)comboBoxArtist.SelectedItem);
-            listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
+            listBoxSongList.DataContext = null;
+            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
         }
 
         private void comboBoxGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CDCatalogProcess.FilterSongsByGenre((Genre)comboBoxGenre.SelectedItem);
-            listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
+            listBoxSongList.DataContext = null;
+            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
         }
 
         private void comboBoxPlaylist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CDCatalogProcess.FilterSongsByPlaylist((Playlist)comboBoxPlaylist.SelectedItem);
+            listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
         }
 
@@ -208,15 +213,26 @@ namespace CDCatalogUI
             comboBoxPlaylist.DataContext = null;
             comboBoxPlaylist.DataContext = CDCatalogProcess.filterPlaylistList;
             listBoxSongList.DataContext = null;
-            listBoxSongList.DataContext = CDCatalogProcess.displaySongList;
+            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
             rbViewOptionsAll.IsChecked = true;
         }
 
         private void btnSearchTitle_Click(object sender, RoutedEventArgs e)
         {
-            CDCatalogProcess.GetSongsandAlbums();
-            listBoxSongList.DataContext = null;
-            listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
+            if (txtSearchTitle.Text != "")
+            {
+                CDCatalogProcess.GetSongsandAlbumsByTitle(txtSearchTitle.Text);
+                listBoxSongList.DataContext = null;
+                listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
+                if(CDCatalogProcess.songsAndAlbums.Count == 0)
+                {
+                    MessageBox.Show("No matching Songs or Albums found.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Cannot search on blank title.");
+            }
         }
 
         private void btnRateSong_Click(object sender, RoutedEventArgs e)
@@ -233,6 +249,14 @@ namespace CDCatalogUI
                 rateAlbumWindow.ShowDialog();
                 RefreshUIElements();
             }
+        }
+
+        private void btnRateAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            RateAlbum rateAlbumWindow = new RateAlbum((Album)comboBoxAlbum.SelectedItem);
+            rateAlbumWindow.ShowDialog();
+            RefreshUIElements();
+
         }
     }
 }

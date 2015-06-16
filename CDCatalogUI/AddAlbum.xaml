@@ -6,7 +6,7 @@
         <Label Content="Album Title:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtAddAlbumTitle" HorizontalAlignment="Left" Height="23" Margin="20,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="400"/>
         <Label Content="Artist:" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="comboBoxAddAlbumArtist" HorizontalAlignment="Left" Margin="60,60,0,0" VerticalAlignment="Top" Width="250" ItemsSource="{Binding Mode=OneTime}"/>
+        <ComboBox x:Name="comboBoxAddAlbumArtist" HorizontalAlignment="Left" Margin="60,60,0,0" VerticalAlignment="Top" Width="250" ItemsSource="{Binding}" SelectionChanged="comboBoxAddAlbumArtist_SelectionChanged"/>
         <Button x:Name="btnAddAlbumAddArtist" Content="Add New Artist" HorizontalAlignment="Left" Margin="320,60,0,0" VerticalAlignment="Top" Width="90" Click="btnAddAlbumAddArtist_Click"/>
         <Label Content="Album Rating:" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
         <ComboBox x:Name="comboBoxAddAlbumRating" HorizontalAlignment="Left" Margin="95,85,0,0" VerticalAlignment="Top" Width="150" SelectedIndex="0">
@@ -44,6 +44,8 @@
                 <ComboBoxItem Content="4 stars: Really Like"/>
                 <ComboBoxItem Content="5 stars: Love"/>
             </ComboBox>
+            <Label Content="Artist:" HorizontalAlignment="Left" Margin="250,210,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="comboBoxAddAlbumSongArtist" HorizontalAlignment="Left" Margin="290,210,0,0" VerticalAlignment="Top" Width="200" ItemsSource="{Binding}"/>
             <Button x:Name="btnAddAlbumAddTrack" Content="Add Track" HorizontalAlignment="Left" Margin="520,210,0,0" VerticalAlignment="Top" Width="75" Click="btnAddAlbumAddTrack_Click"/>
         </Grid>
         <Grid>

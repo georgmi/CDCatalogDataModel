@@ -27,6 +27,8 @@ namespace CDCatalogUI
             CDCatalogProcess.AddSongsFillArtists();
             comboBoxAddAlbumArtist.DataContext = CDCatalogProcess.subWindowArtistList;
             comboBoxAddAlbumArtist.SelectedIndex = 0;
+            comboBoxAddAlbumSongArtist.DataContext = CDCatalogProcess.subWindowArtistList;
+            comboBoxAddAlbumSongArtist.SelectedIndex = 0;
             CDCatalogProcess.AddSongsFillGenres();
             comboBoxAddAlbumGenreIn.DataContext = CDCatalogProcess.subWindowGenreList;
             comboBoxAddAlbumGenreIn.SelectedIndex = 0;
@@ -71,8 +73,10 @@ namespace CDCatalogUI
             AddArtist addArtistWindow = new AddArtist();
             addArtistWindow.ShowDialog();
             comboBoxAddAlbumArtist.DataContext = null;
+            comboBoxAddAlbumSongArtist.DataContext = null;
             CDCatalogProcess.AddSongsFillArtists();
             comboBoxAddAlbumArtist.DataContext = CDCatalogProcess.subWindowArtistList;
+            comboBoxAddAlbumSongArtist.DataContext = CDCatalogProcess.subWindowArtistList;
             comboBoxAddAlbumArtist.SelectedIndex = 0;           
         }
 
@@ -102,6 +106,11 @@ namespace CDCatalogUI
             {
                 MessageBox.Show(message);
             }
+        }
+
+        private void comboBoxAddAlbumArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            comboBoxAddAlbumSongArtist.SelectedIndex = comboBoxAddAlbumArtist.SelectedIndex;
         }
     }
 }

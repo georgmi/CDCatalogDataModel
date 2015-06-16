@@ -25,6 +25,10 @@ namespace CDCatalogUI
         {
             InitializeComponent();
             song = input;
+            if(null != song.Rating && song.Rating < 6 && song.Rating > -1)
+            {
+                comboBoxRateSongRating.SelectedIndex = ((int)song.Rating);
+            }
             lblRateSongTitle.Content = "Title: " + song.SongTitle;
             lblRateSongArtist.Content = "By Artist: " + song.Artist.ArtistName;
             lblRateSongAlbum.Content = "On album: " + song.Album.AlbumTitle;
@@ -37,7 +41,7 @@ namespace CDCatalogUI
 
         private void btnRateSongGo_Click(object sender, RoutedEventArgs e)
         {
-            CDCatalogProcess.RateSongGo(song, (comboBoxRateSongRating.SelectedIndex + 1));
+            CDCatalogProcess.RateSongGo(song, (comboBoxRateSongRating.SelectedIndex));
             this.Close();
         }
 
