@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CDCatalogDataModel
 {
-    //TODO: Prevent duplicate records being entered into the database.
-
-    //TODO: When creating items in the database, assign foreign key IDs 
-    //instead of foreign objects. (check behavior of both approaches.)
-
     //Data point: When you db.Table.Add(object) => db.SaveChanges(), the 
     //object you added gets updated with the objectID key value created
     //by the database.
@@ -19,25 +16,32 @@ namespace CDCatalogDataModel
     {
         public static List<Album> GetAlbums()
         {
+            List<Album> albumList = new List<Album>();
             using (CDCatalogEntities db = new CDCatalogEntities())
             {
-                List<Album> albumList = new List<Album>();
                 try
                 {
                     albumList = db.Albums.OrderByDescending(a => a.Rating).ToList();
-                    foreach(Album alb in albumList)
+                    //An Album object has an associated Artist object; this loop attaches Artists to Albums.
+                    foreach (Album alb in albumList)
                     {
                         alb.Artist = db.Artists.Where(art => art.ArtistID.Equals(alb.ArtistID)).First();
                     }
-                   
+
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetAlbums");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return albumList;
             }
+            
         }
 
         public static bool AddAlbum(Album newAlbum)
@@ -51,10 +55,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddAlbum");
+                        sw.WriteLine(SQLe.Message);
+                    }
                 }
                 return success;
             }
@@ -73,10 +82,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeleteAlbum");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -95,14 +109,18 @@ namespace CDCatalogDataModel
                     alb.Rating = editedAlbum.Rating;
                     alb.Year = editedAlbum.Year;
                     alb.ArtistID = editedAlbum.ArtistID;
-                    //alb.Songs = editedAlbum.Songs; //Don't think I need this.
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdateAlbum");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -118,10 +136,15 @@ namespace CDCatalogDataModel
                 {
                     artistList = db.Artists.OrderBy(a => a.ArtistName).ToList();
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetArtists");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return artistList;
             }
@@ -138,10 +161,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddArtist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -160,10 +188,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeleteArtist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -185,10 +218,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdateArtist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -204,10 +242,15 @@ namespace CDCatalogDataModel
                 {
                     genreList = db.Genres.OrderBy(g => g.GenreName).ToList();
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetGenres");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return genreList;
             }
@@ -224,10 +267,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddGenre");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -246,10 +294,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeleteGenre");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -269,10 +322,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdateGenre");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -288,10 +346,15 @@ namespace CDCatalogDataModel
                 {
                     playlistList = db.Playlists.OrderBy(p => p.PlaylistName).ToList();
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetPlaylists");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return playlistList;
             }
@@ -308,10 +371,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddPlaylist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -329,10 +397,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeletePlaylist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -353,10 +426,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdatePlaylist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -372,6 +450,10 @@ namespace CDCatalogDataModel
                 try
                 {
                     songList = db.Songs.OrderByDescending(s => s.Rating).ToList();
+                    //A Song is a complex object. It has associated Artist, Album, and Genre objects,
+                    //and the associated Album object has its own associated Artist object, which may be 
+                    //different than the Artist associated with the Song.
+                    //This loop populates the Song object with its necessary associated data.
                     foreach(Song song in songList)
                     {
                         song.Artist = db.Artists.Where(art => art.ArtistID.Equals(song.ArtistID)).First();
@@ -380,10 +462,15 @@ namespace CDCatalogDataModel
                         song.Album.Artist = db.Artists.Where(art => (art.ArtistID == song.Album.ArtistID)).First();
                     }
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetSongs");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return songList;
             }
@@ -400,10 +487,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -422,10 +514,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeleteSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -451,10 +548,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch (Exception e)
+                catch (Exception SQLe)
                 {
-                    throw e;
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdateSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -470,9 +572,15 @@ namespace CDCatalogDataModel
                 {
                     playlistSongList = db.PlaylistSongs.OrderBy(p => p.SongOrder).ToList();
                 }
-                catch
+                catch (Exception SQLe)
                 {
-                    //TODO: Figure out what to do with an exception. Business logic should handle the return of an empty List<>.
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetPlaylistSongs");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return playlistSongList;
             }
@@ -489,9 +597,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception SQLe)
                 {
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.AddPlaylistSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -512,9 +626,15 @@ namespace CDCatalogDataModel
                         songList.Add(workingList.Where(s => s.SongID.Equals(pls.SongID)).First());
                     }
                 }
-                catch
+                catch (Exception SQLe)
                 {
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.GetSongsFromPlaylist");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
             }
             return songList;
@@ -531,9 +651,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception SQLe)
                 {
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.DeletePlaylistSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }
@@ -553,9 +679,15 @@ namespace CDCatalogDataModel
                     db.SaveChanges();
                     success = true;
                 }
-                catch
+                catch (Exception SQLe)
                 {
-                    //TODO: Figure out what to do with an exception. 
+                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    {
+                        sw.WriteLine("--------------");
+                        sw.WriteLine(DateTime.Now);
+                        sw.WriteLine("Source: CDCatalogManager.UpdatePlaylistSong");
+                        sw.WriteLine(SQLe.ToString());
+                    }
                 }
                 return success;
             }

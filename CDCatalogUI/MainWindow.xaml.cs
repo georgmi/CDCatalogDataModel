@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,6 @@ namespace CDCatalogUI
         {
             InitializeComponent();
             this.Loaded += new RoutedEventHandler(rbViewOptionsAll_Checked);
-            
         }
 
         private void rbViewOptionsAll_Checked(object sender, RoutedEventArgs e)
@@ -121,6 +121,8 @@ namespace CDCatalogUI
 
         private void HideAllFilterGrids()
         {
+            //When manipulating controls in code, it's best to remove event handlers that are intended to react to user actions.
+            //When each FilterGrid is enabled, its appropriate handler will be reattached.
             comboBoxAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAlbum_SelectionChanged));
             comboBoxArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxArtist_SelectionChanged));
             comboBoxGenre.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxGenre_SelectionChanged));
@@ -197,11 +199,15 @@ namespace CDCatalogUI
 
         public void RefreshUIElements()
         {
+            //When manipulating controls in code, it's best to remove event handlers that are intended to react to user actions.
+            //When each FilterGrid is enabled, its appropriate handler will be reattached.
             comboBoxAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAlbum_SelectionChanged));
             comboBoxArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxArtist_SelectionChanged));
             comboBoxGenre.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxGenre_SelectionChanged));
             comboBoxPlaylist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxPlaylist_SelectionChanged));
+
             CDCatalogProcess.RefreshMainWindowLists();
+
             comboBoxAlbum.DataContext = null;
             comboBoxAlbum.DataContext = CDCatalogProcess.filterAlbumList;
             comboBoxAllSongs.DataContext = null;
@@ -257,6 +263,56 @@ namespace CDCatalogUI
             rateAlbumWindow.ShowDialog();
             RefreshUIElements();
 
+        }
+
+        private void btnEditSong_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit Song or Album not yet implemented.");
+        }
+
+        private void btnDeleteSong_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete Song or Album not yet implemented.");
+        }
+
+        private void btnEditPlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit Playlist not yet implemented.");
+        }
+
+        private void btnDeletePlaylist_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete Playlist not yet implemented.");
+        }
+
+        private void btnEditGenre_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit Genre not yet implemented.");
+        }
+
+        private void btnDeleteGenre_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete Genre not yet implemented.");
+        }
+
+        private void btnDeleteArtist_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete Artist not yet implemented.");
+        }
+
+        private void btnEditArtist_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit Artist not yet implemented.");
+        }
+
+        private void btnDeleteAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Delete Album not yet implemented.");
+        }
+
+        private void btnEditAlbum_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Edit Album not yet implemented.");
         }
     }
 }

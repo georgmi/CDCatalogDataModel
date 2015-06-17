@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,13 @@ namespace CDCatalogDataModel
             public Genre genre;
             public string genreName;
             public int genreID;
+            public Artist artist;
             public int tracklength;
             public int rating;
 
             public override string ToString()
             {
-                return ("Track# " + tracknum.ToString() + ": " + title + "; " + tracklength.ToString() + " sec.; rating=" + rating.ToString() + "; " + genreName);
+                return ("Track# " + tracknum.ToString() + ": " + title + ", by " + artist + "; " + tracklength.ToString() + " sec.; rating=" + rating.ToString() + "; " + genreName);
             }
         }
 
@@ -61,11 +63,13 @@ namespace CDCatalogDataModel
 
         public static void GetAllSongs()
         {
-            displaySongList = CDCatalogManager.GetSongs();
+            displaySongList = CDCatalogManager.GetSongs();            
         }
 
         public static void GetSongsandAlbums()
         {
+            //For certain operations, the display box in the MainWindow is populated with both Songs
+            //and Albums. This method fills a List<object> with both types of entry.
             songsAndAlbums.Clear();
             GetAllAlbums();
             GetAllSongs();
@@ -81,6 +85,8 @@ namespace CDCatalogDataModel
 
         public static void GetSongsandAlbumsByTitle(string snippet)
         {
+            //When the user searches by title, the display box in the MainWindow is populated with 
+            //matching Songs and Albums. This method fills a List<object> with both types of entry.
             songsAndAlbums.Clear();
             GetAllAlbums();
             GetAllSongs();
@@ -102,13 +108,17 @@ namespace CDCatalogDataModel
 
         public static void FilterSongsByAlbum(Album album)
         {
+            //Find all the songs on a praticular Album.
             filteredSongList.Clear();
             filteredSongList = displaySongList.Where(s => s.AlbumID == album.AlbumID).ToList();
         }
 
         public static void FilterSongsByArtist(Artist artist)
         {
+            //Find all the Songs by a particular Artist, and all the Albums 
+            //on which those Songs appear.
             filteredSongList.Clear();
+            //The below line is leftover from the initial functionality, which only selected Songs.
             //filteredSongList = displaySongList.Where(s => s.ArtistID == artist.ArtistID).ToList();
             List<Album> workingAlbums = new List<Album>();
             List<Album> sortedAlbums = new List<Album>();
@@ -142,7 +152,9 @@ namespace CDCatalogDataModel
 
         public static void FilterSongsByGenre(Genre genre)
         {
+            //Find all the Songs in a particular Ganre.
             filteredSongList.Clear();
+            //The below line is leftover from the initial functionality, which only selected Songs.
             //filteredSongList = displaySongList.Where(s => s.GenreID == genre.GenreID).ToList();
             List<Album> workingAlbums = new List<Album>();
             List<Album> sortedAlbums = new List<Album>();
@@ -177,18 +189,21 @@ namespace CDCatalogDataModel
 
         public static void FilterSongsByPlaylist(Playlist playlist)
         {
+            //Find all the Songs in addAlbumAddTrack particular Playlist.
             filteredSongList.Clear();
             filteredSongList = CDCatalogManager.GetSongsFromPlaylist(playlist);
         }
 
         public static void FilterAlbumsByArtist(Artist artist)
         {
+            //This method is used by the AddSong subwindow to assist the user in selecting Albums and Artists.
             subWindowAlbumList.Clear();
             subWindowAlbumList = CDCatalogManager.GetAlbums().Where(alb => alb.ArtistID.Equals(artist.ArtistID)).ToList();
         }
 
         public static void FilterArtistsByAlbum(Album album)
         {
+            //This method is used by the AddSong subwindow to assist the user in selecting Albums and Artists.
             int artistID = album.ArtistID;
             subWindowArtistList.Clear();
             subWindowArtistList = CDCatalogManager.GetArtists().Where(art => art.ArtistID.Equals(artistID)).ToList();
@@ -198,6 +213,7 @@ namespace CDCatalogDataModel
 
         public static void RefreshMainWindowLists()
         {
+            //Whenever you return to the MainWindow, pick up any changes from the DB.
             GetAllAlbums();
             GetAllArtists();
             GetAllGenres();
@@ -207,24 +223,29 @@ namespace CDCatalogDataModel
 
         public static void AddSongsFillArtists()
         {
+            //Populate the Artist list for subwindows.
             subWindowArtistList.Clear();
             subWindowArtistList = CDCatalogManager.GetArtists();
         }
 
         public static void AddSongsFillAlbums()
         {
+            //Populate the Song list for subwindows.
             subWindowAlbumList.Clear();
             subWindowAlbumList = CDCatalogManager.GetAlbums();
         }
 
         public static void AddSongsFillGenres()
         {
+            //Populate the Genre list for subwindows.
             subWindowGenreList.Clear();
             subWindowGenreList = CDCatalogManager.GetGenres();
         }
 
         public static int CreatePlaylistValidateLength(string length)
         {
+            //Make sure the target length specified by the user for a Playlist
+            //is a legal value (X > 0).
             int output = 0;
 
             int.TryParse(length, out output);
@@ -239,6 +260,7 @@ namespace CDCatalogDataModel
 
         public static int CreatePlaylistGo(string playListName, int minutes)
         {
+            //Generate a random Playlist of the length specified.
             subWindowPlaylistSongs.Clear();
             Song songObject = new Song();
             int totalDuration = 0;
@@ -258,6 +280,7 @@ namespace CDCatalogDataModel
 
         public static void AddGenreGo(string genreName)
         {
+            //Add a new Genre to the model.
             int doesGenreExist = CDCatalogManager.GetGenres().Where(g => g.GenreName.Equals(genreName)).Count();
             if (doesGenreExist == 0)
             {
@@ -274,6 +297,7 @@ namespace CDCatalogDataModel
 
         public static void AddArtistGo(string artistName)
         {
+            //Add a new Artist to the model.
             int doesArtistExist = CDCatalogManager.GetArtists().Where(a => a.ArtistName.Equals(artistName)).Count();
             if (doesArtistExist == 0)
             {
@@ -283,13 +307,15 @@ namespace CDCatalogDataModel
             }
             else
             {
-                //TODO: Message to user? Or not, because the genre they tried to add is in the database, 
+                //TODO: Message to user? Or not, because the artist they tried to add is in the database, 
                 //which is what they wanted.
             }
         }
 
-        public static bool AddAlbumVerifyTrack(string tracknum, string title, Genre genre, string tracklengthmin, string tracklengthsec, int rating, out string message)
+        public static bool AddAlbumVerifyTrack(string tracknum, string title, Genre genre, Artist artist, string tracklengthmin, string tracklengthsec, int rating, out string message)
         {
+            //Check the input fields to see if they're valid, then save the track information
+            //to a list for later use. (We don't add the tracks to the model until the whole Album is ready to go.)
             bool isValid = true;
             message = "";
             int tracknumber = 0;
@@ -326,17 +352,19 @@ namespace CDCatalogDataModel
             if(isValid)
             {
                 int totaltracktime = ((trackminutes * 60) + trackseconds);
-                addAlbumAddTrack(tracknumber, title, genre, totaltracktime, rating);
+                addAlbumAddTrack(tracknumber, title, genre, artist, totaltracktime, rating);
             }
             return isValid;
         }
 
-        public static void addAlbumAddTrack(int tracknum, string title, Genre genre, int tracklength, int rating)
+        public static void addAlbumAddTrack(int tracknum, string title, Genre genre, Artist artist, int tracklength, int rating)
         {
+            //Populate a TrackInfo struct and add it to the list.
             TrackInfo newtrack = new TrackInfo();
             newtrack.tracknum = tracknum;
             newtrack.title = title;
             newtrack.genre = genre;
+            newtrack.artist = artist;
             newtrack.genreName = genre.GenreName;
             newtrack.genreID = genre.GenreID;
             newtrack.tracklength = tracklength;
@@ -346,6 +374,7 @@ namespace CDCatalogDataModel
 
         public static bool addAlbumGo(string albumTitle, Artist artist, int albumRating, string year, List<TrackInfo> tracks, out string message)
         {
+            //Verify Album input fields, then add the Album and all associated tracks to the model.
             bool isValid = true;
             message = "";
             int yr = 0;
@@ -375,7 +404,7 @@ namespace CDCatalogDataModel
                 {
                     song = new Song();
                     song.AlbumID = album.AlbumID;
-                    song.ArtistID = artist.ArtistID;
+                    song.ArtistID = t.artist.ArtistID;
                     song.GenreID = t.genreID;
                     song.Rating = t.rating;
                     song.SongTitle = t.title;
@@ -391,11 +420,20 @@ namespace CDCatalogDataModel
         public static bool AddSongGo(string title, Artist artist, Album album, string trackIn, Genre genre, 
                     string minutes, string seconds, int rating, out string message)
         {
+            //Validate the input fields from the AddSong window, then add the Song to the model.
             bool isValid = true;
             message = "";
             int tracknum = 0;
             int trackminutes = 0;
             int trackseconds = 0;
+            int doesSongExist = CDCatalogManager.GetSongs().Where(s => s.SongTitle.Equals(title)).Where(
+                                    s => s.AlbumID.Equals(album.AlbumID)).Where(
+                                    s=> s.ArtistID.Equals(artist.ArtistID)).Count();
+            if(doesSongExist != 0)
+            {
+                isValid = false;
+                message += "A Song by this Artist on this Album already exists in the database.";
+            }
             if(title == "")
             {
                 isValid = false;
@@ -456,38 +494,43 @@ namespace CDCatalogDataModel
 
         public static void RateSongGo(Song song, int rating)
         {
+            //Change a Song's Rating. Validation isn't necessary because the ComboBox controls what value the user can submit.
             song.Rating = rating;
             CDCatalogManager.UpdateSong(song);
         }
 
         public static void RateAlbumGo(Album album, int rating)
         {
+            //Change an Album's Rating. Validation isn't necessary because the ComboBox controls what value the user can submit.
             album.Rating = rating;
             CDCatalogManager.UpdateAlbum(album);
         }
 
         public static List<PlaylistSong> GeneratePlayList(string playListName, int minutes)
         {
+            
             List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
             List<Song> workingList = CDCatalogManager.GetSongs(); //TODO: Filter songs based on Genre and/or Rating.
             int seconds = (minutes * 60); //Song lengths are stored in seconds, but the user selects a playlist duration in minutes.
 
             Playlist playlist = new Playlist();
-            playlist.PlaylistName = playListName; //TODO: Consider checking for and preventing duplicate names.
+            playlist.PlaylistName = playListName; //TODO: Consider checking for and preventing duplicate names. 
             CDCatalogManager.AddPlaylist(playlist);
 
             playlistSongList = CombinationsPlaylist(workingList, playlist, seconds); //Works speedily now.
-            //playlistSongList = RandomPlayList(workingList, seconds, playlist);  //My prior algorithm. 
+            //playlistSongList = RandomPlayList(workingList, seconds, playlist);  //My prior algorithm, which did not guarantee a return. 
 
             return playlistSongList;
         }
 
         public static List<PlaylistSong> CombinationsPlaylist(List<Song> inputList, Playlist playlist, int durationSeconds)
         {
+            //Set up the environment for the recursive combinatorial algorithm to work.
             Random rand = new Random();
             List<Song> resultList = new List<Song>();
+            //Shuffling the list of Songs each time means every Playlist will be different, even if they've
+            //got the samew target lengths.
             List<Song> workingList = Shuffle(inputList);
-            //List<Song> selectedList = new List<Song>(); //The algorithm now returns a single List<Song>; no need to pick one of several
             List<PlaylistSong> playlistSongList = new List<PlaylistSong>();
             PlaylistSong newPLS = null;
             int songOrder = 1;
@@ -506,10 +549,6 @@ namespace CDCatalogDataModel
                 playlistSongList.Add(newPLS);
                 songOrder++;
             }
-
-            //The code block that was here to handle the case where no valid List<Song> was found
-            //is no longer necessary, because the recursion is now guaranteed to return a List<Song>.
-
             return playlistSongList;
         }
 
@@ -538,6 +577,7 @@ namespace CDCatalogDataModel
 
         public static List<Song> Combinations(List<Song> inputList, int durationSeconds)
         {
+            //This sets up for the recursive part of the cominatorial algorithm.
             int totalDuration = 0;
             foreach (Song s in inputList)
             {
@@ -594,6 +634,8 @@ namespace CDCatalogDataModel
                     //results back up to the top. To do that, I need to know whether what's coming back is appropriate 
                     //to pass up the stack, or if instead I need to keep going.
                     storageList = recursiveCombine(inputList, workingList, durationSeconds, count, (recursionLevel + 1), (i + 1));
+                    //Ceck to see if the current list is longer than the target time. If it is, stop iterating on it,
+                    //because you can never get a correct list by adding songs to a list that's already too long.
                     totalDuration = 0;
                     foreach (Song s in storageList)
                     {

@@ -35,6 +35,8 @@ namespace CDCatalogUI
             //Collect and validate inputs:
                 //Name should be any string
                 //Length should be a positive integer
+            //BUGBUG: All this validation code should really be in the Process layer.
+            //BUGBUG: Validation code does not check for duplicate playlist name in database.
             int length = CDCatalogProcess.CreatePlaylistValidateLength(txtCreatePlaylistMinutes.Text);
             if (length > 0 && txtCreatePlaylistName.Text.Length > 0)
             {
@@ -59,7 +61,7 @@ namespace CDCatalogUI
                 MessageBox.Show(message);
             }
             //Create playlist
-            //Display playlist in listbox
+            //Display playlist in listbox --handled by MainWindow.
         }
     }
 }

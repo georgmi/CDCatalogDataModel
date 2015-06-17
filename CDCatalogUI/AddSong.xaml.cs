@@ -74,6 +74,11 @@ namespace CDCatalogUI
 
         private void comboBoxAddSongArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //BUGBUG: This handler and comboBoxAddSongAlbum_SelectionChanged were intended to make searching for Albums and Artists 
+            //easier for the user, but the way they were implemented, it was not possible to create a Song that had an Artist that 
+            //was different from the Album's Artist, which is problematic for compilations and soundtracks. There was not time
+            //to fix the functionality, so for now, the handlers are noops.
+
             //comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
             //comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
             //Artist selectedArtist = (Artist)comboBoxAddSongArtist.SelectedItem;
@@ -90,6 +95,11 @@ namespace CDCatalogUI
 
         private void comboBoxAddSongAlbum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //BUGBUG: This handler and comboBoxAddSongArtist_SelectionChanged were intended to make searching for Albums and Artists 
+            //easier for the user, but the way they were implemented, it was not possible to create a Song that had an Artist that 
+            //was different from the Album's Artist, which is problematic for compilations and soundtracks. There was not time
+            //to fix the functionality, so for now, the handlers are noops.
+
             //Album selectedAlbum = (Album)comboBoxAddSongAlbum.SelectedItem;
             //comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
             //comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));

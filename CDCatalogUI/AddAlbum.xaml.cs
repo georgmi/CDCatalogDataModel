@@ -48,6 +48,7 @@ namespace CDCatalogUI
                     txtAddAlbumTrackNumIn.Text, 
                     txtAddAlbumTrackTitleIn.Text, 
                     (Genre)comboBoxAddAlbumGenreIn.SelectedItem, 
+                    (Artist)comboBoxAddAlbumSongArtist.SelectedItem,
                     txtAddAlbumTrackLengthMinIn.Text,
                     txtAddAlbumTrackLengthSecIn.Text,
                     comboBoxAddAlbumTrackRating.SelectedIndex, 

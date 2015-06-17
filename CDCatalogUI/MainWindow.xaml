@@ -62,37 +62,37 @@
         <Grid Name="gridAlbumActions" Visibility="Hidden">
             <!--Actions to perform on selected Albums-->
             <Label x:Name="lblAlbumActions" Content="Do this to selected album:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnEditAlbum" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnDeleteAlbum" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnEditAlbum" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50" Click="btnEditAlbum_Click"/>
+            <Button x:Name="btnDeleteAlbum" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50" Click="btnDeleteAlbum_Click"/>
             <Button x:Name="btnRateAlbum" Content="Rate" HorizontalAlignment="Left" Margin="485,185,0,0" VerticalAlignment="Top" Width="50" Click="btnRateAlbum_Click"/>
         </Grid>
         
         <Grid Name="gridArtistActions" Visibility="Hidden">
             <!--Actions to perform on selected Artist-->
             <Label x:Name="lblArtistActions" Content="Do this to selected artist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnEditArtist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnDeleteArtist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnEditArtist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50" Click="btnEditArtist_Click"/>
+            <Button x:Name="btnDeleteArtist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50" Click="btnDeleteArtist_Click"/>
         </Grid>
 
         <Grid Name="gridGenreActions" Visibility="Hidden">
             <!--Actions to perform on selected Genre-->
             <Label x:Name="lblGenreActions" Content="Do this to selected genre:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnEditGenre" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnDeleteGenre" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnEditGenre" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50" Click="btnEditGenre_Click"/>
+            <Button x:Name="btnDeleteGenre" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50" Click="btnDeleteGenre_Click"/>
         </Grid>
 
         <Grid Name="gridPlaylistActions" Visibility="Hidden">
             <!--Actions to perform on selected Playlist-->
             <Label x:Name="lblPlaylistActions" Content="Do this to selected playlist:" HorizontalAlignment="Left" Margin="350,155,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnEditPlaylist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnDeletePlaylist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnEditPlaylist" Content="Edit" HorizontalAlignment="Left" Margin="365,185,0,0" VerticalAlignment="Top" Width="50" Click="btnEditPlaylist_Click"/>
+            <Button x:Name="btnDeletePlaylist" Content="Delete" HorizontalAlignment="Left" Margin="425,185,0,0" VerticalAlignment="Top" Width="50" Click="btnDeletePlaylist_Click"/>
         </Grid>
 
         <Grid Name="gridSongActions">
             <!--Actions to perform on selected songs-->
             <Label x:Name="lblSongActions" Content="Do this to selected item:" HorizontalAlignment="Left" Margin="20,225,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btnEditSong" Content="Edit" HorizontalAlignment="Left" Margin="175,225,0,0" VerticalAlignment="Top" Width="50"/>
-            <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50"/>
+            <Button x:Name="btnEditSong" Content="Edit" HorizontalAlignment="Left" Margin="175,225,0,0" VerticalAlignment="Top" Width="50" Click="btnEditSong_Click"/>
+            <Button x:Name="btnDeleteSong" Content="Delete" HorizontalAlignment="Left" Margin="235,225,0,0" VerticalAlignment="Top" Width="50" Click="btnDeleteSong_Click"/>
             <Button x:Name="btnRateSong" Content="Rate" HorizontalAlignment="Left" Margin="295,225,0,0" VerticalAlignment="Top" Width="50" Click="btnRateSong_Click"/>
             <!--<Button x:Name="btnAddSongToPL" Content="Add to a Playlist" HorizontalAlignment="Left" Margin="355,225,0,0" VerticalAlignment="Top" Width="100"/>-->
         </Grid>
