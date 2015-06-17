@@ -1,0 +1,12 @@
+I built this CD catalog project as the capstone to my C# certification in 2015. 
+
+Its intent is to track Songs and Albums in a user's music collection, and organize them by Artist and Genre. 
+
+The user can also create Playlists of random songs, fit to a specified duration (+/- one minute).
+
+In addition to the files and folders that are part of the Visual Studio solution, there are also some additional files:
+
+- CDCatalogDropAndCreate.sql is the script used to generate an empty CD database on a SQL server. 
+- CDCatalog.mdf and CDCatalog_log.ldf are the actual database files, populated with test data.
+- BUGBUG.txt is a list of notes to myself about issues that needed to be fixed, and features that have not yet been implemented. Some issues are still active.
+- Project Notes.txt is this file.

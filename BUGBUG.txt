@@ -1,0 +1,50 @@
+BUGS:
+** - "properly commented"
+
+ - MainWindow View reverts to All Songs and Albums when returning from a subwindow.
+
+ - Edit feature NYI.
+
+ - Delete feature NYI.
+
+ - Manual Playlist creation feature NYI.
+
+ - Buttons for each filterview NYI:
+	Album Edit/Delete/XXRate
+	Artist Edit/Delete
+	Genre Edit/Delete
+	Playlist Edit/Delete
+
+ - CDCatalogManager.GetPlaylists should return fully-populated objects. Does not currently return a list of Songs.
+
+ - Songs and albums do not change their position in the list when their ratings are changed until filterview is changed, though rating change is reflected in the text.
+
+ - Multi-select bug (preferred solution: handle multiselection)
+
+XX** - MessageBox for NYI buttons.
+
+XX** - Add Song requires Album and Song to have the same Artist.
+ - It would be nice if Add Song could select artist when user selects album and vice versa, without locking the user into those choices.
+
+XX** - Add Album requires Album and Song to have the same Artist.
+XX** - Adding an Artist only updates Album Artist combobox; does not update Song Artist combobox.
+ - It would be nice if Add Album could select artist when user selects album and vice versa, without locking the user into those choices.
+
+XX** - All Songs View should be All Songs and Albums.
+
+XX** - Artist and Genre Views should be both Songs and Albums.
+
+XX** - Title Search feature NYI.
+
+XX(I think)** - All UI refreshes need a DataContext = null step.
+
+XX** - Buttons for AddSong NYI:
+	XXAdd Artist
+	XXAdd Album
+	XXAdd Genre
+
+XX - Playlistview no longer lists songs
+
+XX - Rate Song/Album dialog should prepopulate to current rating.
+
+XX - RateSong and RateAlbum comboboxes are not long enough.

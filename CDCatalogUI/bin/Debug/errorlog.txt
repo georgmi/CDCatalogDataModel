@@ -1,6 +1,5 @@
 --------------
-Type: EntityException
-6/16/2015 5:19:32 PM
+6/17/2015 2:50:19 PM
 Source: CDCatalogManager.GetAlbums
 System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
    --- End of inner exception stack trace ---
@@ -42,9 +41,9 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at CDCatalogDataModel.CDCatalogManager.GetAlbums() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 24
+   at CDCatalogDataModel.CDCatalogManager.GetAlbums() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 36
 --------------
-6/16/2015 5:19:32 PM
+6/17/2015 2:50:19 PM
 Source: CDCatalogManager.GetSongs
 System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
    --- End of inner exception stack trace ---
@@ -75,10 +74,9 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at CDCatalogDataModel.CDCatalogManager.GetSongs() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 454
+   at CDCatalogDataModel.CDCatalogManager.GetSongs() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 480
 --------------
-Type: EntityException
-6/16/2015 5:19:32 PM
+6/17/2015 2:50:19 PM
 Source: CDCatalogManager.GetAlbums
 System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
    --- End of inner exception stack trace ---
@@ -109,9 +107,9 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at CDCatalogDataModel.CDCatalogManager.GetAlbums() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 24
+   at CDCatalogDataModel.CDCatalogManager.GetAlbums() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 36
 --------------
-6/16/2015 5:19:32 PM
+6/17/2015 2:50:19 PM
 Source: CDCatalogManager.GetSongs
 System.Data.Entity.Core.EntityException: The underlying provider failed on Open. ---> System.Data.SqlClient.SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) ---> System.ComponentModel.Win32Exception: The system cannot find the file specified
    --- End of inner exception stack trace ---
@@ -142,4 +140,4 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
    at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at CDCatalogDataModel.CDCatalogManager.GetSongs() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 454
+   at CDCatalogDataModel.CDCatalogManager.GetSongs() in c:\Users\george\Documents\GitHub\CDCatalogDataModel\CDCatalogDataModel\CDCatalogManager.cs:line 480
