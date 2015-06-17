@@ -32,6 +32,7 @@ namespace CDCatalogUI
 
         private void btnAddGenreGo_Click(object sender, RoutedEventArgs e)
         {
+            //If there's text in the Genre input field, create the Genre.
             if(txtGenreName.Text != "")
             {
                 CDCatalogProcess.AddGenreGo(txtGenreName.Text);

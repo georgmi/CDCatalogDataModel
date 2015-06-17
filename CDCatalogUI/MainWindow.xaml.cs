@@ -30,8 +30,11 @@ namespace CDCatalogUI
 
         private void rbViewOptionsAll_Checked(object sender, RoutedEventArgs e)
         {
+            //Show all songs and albums in the display listbox. 
             if(! rbViewOptionsAll.IsChecked == true )
             {
+                //This is also the MainWindow.Loaded event handler, so we need to initialize 
+                //the radio button th Checked to provide a consistent UI experience.
                 rbViewOptionsAll.IsChecked = true;
             }
             //All ObjectActions grids Visibility="Hidden"
@@ -47,6 +50,7 @@ namespace CDCatalogUI
 
         private void rbViewOptionsCD_Checked(object sender, RoutedEventArgs e)
         {
+            //Set up the UI and display listbox to filter Songs based on the selected Album.
             //All ObjectActions grids Visibility="Hidden"
             HideAllActionGrids();
             HideAllFilterGrids();
@@ -64,6 +68,7 @@ namespace CDCatalogUI
 
         private void rbViewOptionsArtist_Checked(object sender, RoutedEventArgs e)
         {
+            //Set up the UI and display listbox to filter Songs and Albums  based on the selected Artist.
             //All ObjectActions grids Visibility="Hidden"
             HideAllActionGrids();
             HideAllFilterGrids();
@@ -80,6 +85,8 @@ namespace CDCatalogUI
 
         private void rbViewOptionsGenre_Checked(object sender, RoutedEventArgs e)
         {
+            //Set up the UI and display listbox to filter Songs based on the selected Genre,
+            //and show all Albums on which a matching Song appears.
             //All ObjectActions grids Visibility="Hidden"
             HideAllActionGrids();
             HideAllFilterGrids();
@@ -96,6 +103,7 @@ namespace CDCatalogUI
 
         private void rbViewOptionsPlaylist_Checked(object sender, RoutedEventArgs e)
         {
+            //Set up the UI and display listbox to filter Songs based on the selected Playlist.
             //All ObjectActions grids Visibility="Hidden"
             HideAllActionGrids();
             HideAllFilterGrids();
@@ -113,6 +121,8 @@ namespace CDCatalogUI
 
         private void HideAllActionGrids()
         {
+            //When switching between filter views, hide all ActionGrids that might be visible.
+            //Each radio button_Checked handler will re-show the appropriate ActionGrid.
             gridAlbumActions.Visibility = Visibility.Hidden;
             gridArtistActions.Visibility = Visibility.Hidden;
             gridGenreActions.Visibility = Visibility.Hidden;
@@ -136,6 +146,7 @@ namespace CDCatalogUI
 
         private void comboBoxAlbum_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Show the Songs on the selected Album.
             CDCatalogProcess.FilterSongsByAlbum((Album)comboBoxAlbum.SelectedItem);
             listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
@@ -143,6 +154,7 @@ namespace CDCatalogUI
 
         private void comboBoxArtist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Show the Songs and Albums from the selected Artist.
             CDCatalogProcess.FilterSongsByArtist((Artist)comboBoxArtist.SelectedItem);
             listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
@@ -150,6 +162,8 @@ namespace CDCatalogUI
 
         private void comboBoxGenre_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Show the Songs in the selected Genre, and the Albums on which
+            //those Songs appear.
             CDCatalogProcess.FilterSongsByGenre((Genre)comboBoxGenre.SelectedItem);
             listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.songsAndAlbums;
@@ -157,6 +171,7 @@ namespace CDCatalogUI
 
         private void comboBoxPlaylist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Show the Songs in the selected Playlist.
             CDCatalogProcess.FilterSongsByPlaylist((Playlist)comboBoxPlaylist.SelectedItem);
             listBoxSongList.DataContext = null;
             listBoxSongList.DataContext = CDCatalogProcess.filteredSongList;
@@ -164,6 +179,7 @@ namespace CDCatalogUI
 
         private void btnAddNewSong_Click(object sender, RoutedEventArgs e)
         {
+            //Open the Add Song window.
             AddSong addSongWindow = new AddSong(this);
             addSongWindow.Show();
             RefreshUIElements();
@@ -171,6 +187,7 @@ namespace CDCatalogUI
 
         private void btnAddNewPlaylist_Click(object sender, RoutedEventArgs e)
         {
+            //OPen the CreatePlaylist window.
             CreatePlaylist createPlaylistWindow = new CreatePlaylist();
             createPlaylistWindow.ShowDialog();
             RefreshUIElements();
@@ -178,6 +195,7 @@ namespace CDCatalogUI
 
         private void btnAddNewGenre_Click(object sender, RoutedEventArgs e)
         {
+            //Open the AddGenre window.
             AddGenre addGenreWindow = new AddGenre();
             addGenreWindow.ShowDialog();
             RefreshUIElements();
@@ -185,6 +203,7 @@ namespace CDCatalogUI
 
         private void btnAddNewArtist_Click(object sender, RoutedEventArgs e)
         {
+            //Open the AddArtist window.
             AddArtist addArtistWindow = new AddArtist();
             addArtistWindow.ShowDialog();
             RefreshUIElements();
@@ -192,6 +211,7 @@ namespace CDCatalogUI
 
         private void btnAddNewAlbum_Click(object sender, RoutedEventArgs e)
         {
+            //Open the AddAlbum window.
             AddAlbum addAlbumWindow = new AddAlbum(this);
             addAlbumWindow.Show();
             RefreshUIElements();
@@ -225,6 +245,7 @@ namespace CDCatalogUI
 
         private void btnSearchTitle_Click(object sender, RoutedEventArgs e)
         {
+            //Filter the Songs and Albums display based on the search string entered by the user.
             if (txtSearchTitle.Text != "")
             {
                 CDCatalogProcess.GetSongsandAlbumsByTitle(txtSearchTitle.Text);
@@ -243,6 +264,8 @@ namespace CDCatalogUI
 
         private void btnRateSong_Click(object sender, RoutedEventArgs e)
         {
+            //Open the appropriate Rate window, based on the type of the SelectedItem.
+            //(This is the Rate button for the Songs and Albums list.)
             if(listBoxSongList.SelectedItem is Song)
             {
                 RateSong rateSongWindow = new RateSong((Song)listBoxSongList.SelectedItem);
@@ -259,6 +282,8 @@ namespace CDCatalogUI
 
         private void btnRateAlbum_Click(object sender, RoutedEventArgs e)
         {
+            //Open the Rate Album window.
+            //(This is the Rate button for the Albums combobox.)
             RateAlbum rateAlbumWindow = new RateAlbum((Album)comboBoxAlbum.SelectedItem);
             rateAlbumWindow.ShowDialog();
             RefreshUIElements();

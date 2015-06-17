@@ -23,6 +23,7 @@ namespace CDCatalogUI
         Song song;
         public RateSong(Song input)
         {
+            //Start by showing the current information for the selected Song.
             InitializeComponent();
             song = input;
             if(null != song.Rating && song.Rating < 6 && song.Rating > -1)
@@ -41,6 +42,8 @@ namespace CDCatalogUI
 
         private void btnRateSongGo_Click(object sender, RoutedEventArgs e)
         {
+            //It shouldn't be possible to submit this form with an invalid value for Rating,
+            //so no validation is needed.
             CDCatalogProcess.RateSongGo(song, (comboBoxRateSongRating.SelectedIndex));
             this.Close();
         }

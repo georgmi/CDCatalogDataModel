@@ -41,6 +41,8 @@ namespace CDCatalogDataModel
 
         public static List<TrackInfo> addAlbumTrackList = new List<TrackInfo>();
 
+        //The GetAll* methods are just local wrappers for the DB layer, to save the developer 
+        //from having to type "CDCatalogManager." over and over again.
         public static void GetAllAlbums()
         {
             filterAlbumList = CDCatalogManager.GetAlbums();
@@ -108,7 +110,7 @@ namespace CDCatalogDataModel
 
         public static void FilterSongsByAlbum(Album album)
         {
-            //Find all the songs on a praticular Album.
+            //Find all the songs on a particular Album.
             filteredSongList.Clear();
             filteredSongList = displaySongList.Where(s => s.AlbumID == album.AlbumID).ToList();
         }

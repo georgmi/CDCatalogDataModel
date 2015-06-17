@@ -10,10 +10,22 @@ namespace CDCatalogDataModel
 {
     //Data point: When you db.Table.Add(object) => db.SaveChanges(), the 
     //object you added gets updated with the objectID key value created
-    //by the database.
+    //by the database. Use this info to immediately use the objects you've
+    //submitted in upper layers without having to go back to the database to find them.
 
     public class CDCatalogManager
     {
+        public static void LogError(string source, string message)
+        {
+            using (StreamWriter sw = File.AppendText("errorlog.txt"))
+            {
+                sw.WriteLine("--------------");
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine("Source: " + source);
+                sw.WriteLine(message);
+            }
+        }
+
         public static List<Album> GetAlbums()
         {
             List<Album> albumList = new List<Album>();
@@ -31,13 +43,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetAlbums");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetAlbums", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetAlbums");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return albumList;
             }
@@ -57,13 +70,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddAlbum");
-                        sw.WriteLine(SQLe.Message);
-                    }
+                    LogError("CDCatalogManager.AddAlbum", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddAlbum");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -84,13 +98,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeleteAlbum");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeleteAlbum", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeleteAlbums");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -114,13 +129,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdateAlbum");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdateAlbum", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdateAlbum");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -138,13 +154,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetArtists");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetArtists", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetArtists");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return artistList;
             }
@@ -163,13 +180,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddArtist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.AddArtist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddArtist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -190,13 +208,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeleteArtist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeleteArtist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeleteArtist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -220,13 +239,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdateArtist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdateArtist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdateArtist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -244,13 +264,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetGenres");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetGenres", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetGenres");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return genreList;
             }
@@ -269,13 +290,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddGenre");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.AddGenre", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddGenre");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -296,13 +318,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeleteGenre");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeleteGenre", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeleteGenre");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -324,13 +347,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdateGenre");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdateGenre", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdateGenre");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -348,13 +372,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetPlaylists");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetPlaylists", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetPlaylists");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return playlistList;
             }
@@ -373,13 +398,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddPlaylist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.AddPlaylist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddPlaylist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -399,13 +425,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeletePlaylist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeletePlaylist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeletePlaylist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -428,13 +455,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdatePlaylist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdatePlaylist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdatePlaylist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -464,13 +492,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetSongs");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetSongs", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetSongs");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return songList;
             }
@@ -489,13 +518,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.AddSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -516,13 +546,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeleteSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeleteSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeleteSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -550,13 +581,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdateSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdateSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdateSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -574,13 +606,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetPlaylistSongs");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetPlaylistSongs", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetPlaylistSongs");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return playlistSongList;
             }
@@ -599,13 +632,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.AddPlaylistSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.AddPlaylistSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.AddPlaylistSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -613,6 +647,8 @@ namespace CDCatalogDataModel
 
         public static List<Song> GetSongsFromPlaylist(Playlist playlist)
         {
+            //Take a Playlist, find all the PlaylistSongs with the matchingPlaylistID,
+            //and populate a List with all the Songs that match the PlaylistSongs' SongIDs.
             List<Song> workingList = GetSongs();
             List<Song> songList = new List<Song>();
             List<PlaylistSong> pLSList = new List<PlaylistSong>();
@@ -628,13 +664,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.GetSongsFromPlaylist");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.GetSongsFromPlaylist", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.GetSongsFromPlaylist");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
             }
             return songList;
@@ -653,13 +690,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.DeletePlaylistSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.DeletePlaylistSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.DeletePlaylistSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }
@@ -681,13 +719,14 @@ namespace CDCatalogDataModel
                 }
                 catch (Exception SQLe)
                 {
-                    using (StreamWriter sw = File.AppendText("errorlog.txt"))
-                    {
-                        sw.WriteLine("--------------");
-                        sw.WriteLine(DateTime.Now);
-                        sw.WriteLine("Source: CDCatalogManager.UpdatePlaylistSong");
-                        sw.WriteLine(SQLe.ToString());
-                    }
+                    LogError("CDCatalogManager.UpdatePlaylistSong", SQLe.ToString());
+                    //using (StreamWriter sw = File.AppendText("errorlog.txt"))
+                    //{
+                    //    sw.WriteLine("--------------");
+                    //    sw.WriteLine(DateTime.Now);
+                    //    sw.WriteLine("Source: CDCatalogManager.UpdatePlaylistSong");
+                    //    sw.WriteLine(SQLe.ToString());
+                    //}
                 }
                 return success;
             }

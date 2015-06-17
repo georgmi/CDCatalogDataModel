@@ -32,6 +32,7 @@ namespace CDCatalogUI
 
         private void btnAddArtistGo_Click(object sender, RoutedEventArgs e)
         {
+            //If there's text in the ArtistName input field, create the Artist record in the DB.
             if (txtArtistName.Text != "")
             {
                 CDCatalogProcess.AddArtistGo(txtArtistName.Text);

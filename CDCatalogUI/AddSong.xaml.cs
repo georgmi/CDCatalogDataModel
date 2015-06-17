@@ -20,6 +20,12 @@ namespace CDCatalogUI
     /// </summary>
     public partial class AddSong : Window
     {
+        //If I do a Window.Show() from a parent window, a new thread is spawned, so the parent window cannot 
+        //get an updated view of the model, because its only opportunity to do so comes before any changes are made.
+        //I solve this in AddPlaylist, AddGenre, and AddArtist by using Window.ShowDialog(), but AddAlbum and AddSong 
+        //have potential child windows, and ShowDialog() makes them behave oddly.
+        //So instead, I call AddAlbum and AddSong with a context, and later on use the context to update the parent 
+        //window from here.
         MainWindow invoker;
         public AddSong(MainWindow caller)
         {
@@ -30,6 +36,7 @@ namespace CDCatalogUI
 
         private void SetUpUI()
         {
+            //Populate all the combobox controls in the AddSong window.
             comboBoxAddSongArtist.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongArtist_SelectionChanged));
             comboBoxAddSongAlbum.RemoveHandler(ComboBox.SelectionChangedEvent, new SelectionChangedEventHandler(comboBoxAddSongAlbum_SelectionChanged));
             CDCatalogProcess.AddSongsFillArtists();
@@ -52,6 +59,8 @@ namespace CDCatalogUI
 
         private void btnAddSongSave_Click(object sender, RoutedEventArgs e)
         {
+            //Submit the Song information for validation and DB update.
+            //If validation fails, show the user the list of error messages provided by the validation code.
             string message;
             if (CDCatalogProcess.AddSongGo(txtAddSongTitle.Text, 
                     (Artist)comboBoxAddSongArtist.SelectedItem, 
@@ -129,6 +138,7 @@ namespace CDCatalogUI
 
         private void btnAddSongAddArtist_Click(object sender, RoutedEventArgs e)
         {
+            //Add an Artist from the Add Song window.
             AddArtist addArtistWindow = new AddArtist();
             addArtistWindow.ShowDialog();
             SetUpUI();
@@ -141,6 +151,7 @@ namespace CDCatalogUI
 
         private void btnAddSongAddGenre_Click(object sender, RoutedEventArgs e)
         {
+            //Add a Genre from the Add Song window.
             AddGenre addGenreWindow = new AddGenre();
             addGenreWindow.ShowDialog();
             SetUpUI();

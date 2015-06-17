@@ -24,6 +24,7 @@ namespace CDCatalogUI
 
         public RateAlbum(Album input)
         {
+            //Start by showing the current information for the selected Song.
             InitializeComponent();
             album = input;
             if (null != album.Rating && album.Rating < 6 && album.Rating > -1)
@@ -41,6 +42,8 @@ namespace CDCatalogUI
 
         private void btnRateAlbumGo_Click(object sender, RoutedEventArgs e)
         {
+            //It shouldn't be possible to submit this form with an invalid value for Rating,
+            //so no validation is needed.
             CDCatalogProcess.RateAlbumGo(album, (comboBoxRateSongRating.SelectedIndex));
             this.Close();
         }
